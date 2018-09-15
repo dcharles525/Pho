@@ -10,7 +10,7 @@
 #export DH_VERBOSE=1
 
 %:
-	dh $@
+	dh $@ 
 
 override_dh_auto_clean:
 	rm -rf debian/build
@@ -26,4 +26,4 @@ override_dh_auto_test:
 	cd debian/build && ninja test
 
 override_dh_auto_install:
-	cd debian/build && DESTDIR=${CURDIR}/debian/com.github.cassidyjames.principles ninja install
+	cd debian/build && DESTDIR=${CURDIR}/debian/com.github.dcharles525.pho ninja install
