@@ -1,3 +1,5 @@
+---
+
 language: node_js
 
 node_js:
@@ -14,13 +16,22 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - libstdc++-5-dev
-      - valac
+
 cache:
   directories:
     - /tmp/liftoff
+
+matrix:
+  include:
+    - env: DIST=juno
 
 install:
   - npm install @elementaryos/houston
 
 script:
-- houston ci
+  - houston ci
+    --distribution $DIST
+
+branches:
+  only:
+- master
