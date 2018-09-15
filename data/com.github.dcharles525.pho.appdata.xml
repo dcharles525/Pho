@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2018 Your Name phomaker -->
-<component type="desktop">
+<!-- Copyright 2018 David Johnson Pho -->
+<component type="desktop-application">
   <id>com.github.dcharles525.pho</id>
-  <metadata_license>CC0</metadata_license>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
   <name>Pho</name>
   <summary>Pho for 4chan</summary>
   <description>
@@ -13,6 +14,13 @@
 <provides>
  <binary>com.github.dcharles525.pho</binary>
 </provides>
+
+<releases>
+  <release version="1.0.0" date="2018-9-15">
+    <description>
+      <p>Browse any board on 4chan!</p>
+    </description>
+</release>
 
 <developer_name>phomaker</developer_name>
 <url type="homepage">https://github.com/dcharles525/pho</url>
@@ -52,19 +60,17 @@
   <screenshot type="default">
     <image>https://raw.githubusercontent.com/dcharles525/pho/master/data/screenshot1.png</image>
   </screenshot>
+  <screenshot type="default">
+    <image>https://raw.githubusercontent.com/dcharles525/pho/master/data/screenshot2.png</image>
+  </screenshot>
 </screenshots>
 
-<releases>
- <release version="1.0.3" date="2018-09-09">
-     <description>
-        <ul>
-          <li>Initial release</li>
-       </ul>
-     </description>
-   </release>
-</releases>
+<developer_name>David Johnson</developer_name>
+<url type="homepage">https://github.com/dcharles525</url>
+<url type="bugtracker">https://github.com/dcharles525/pho/issues</url>
 
 <custom>
   <value key="x-appcenter-color-primary">#1d8047</value>
   <value key="x-appcenter-color-primary-text">#ffffff</value>
+  <value key="x-appcenter-suggested-price">3</value>
 </custom>
