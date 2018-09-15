@@ -15,8 +15,8 @@
 </provides>
 
 <developer_name>phomaker</developer_name>
-<url type="homepage">https://github.com/phomaker</url>
-<url type="bugtracker">https://github.com/phomaker/pho/issues</url>
+<url type="homepage">https://github.com/dcharles525/pho</url>
+<url type="bugtracker">https://github.com/dcharles525/pho/issues</url>
 
 <content_rating type="oars-1.1">
  <content_attribute id="violence-cartoon">none</content_attribute>
@@ -50,7 +50,7 @@
 
 <screenshots>
   <screenshot type="default">
-    <image>https://raw.githubusercontent.com/phomaker/pho/master/data/screenshot1.png</image>
+    <image>https://raw.githubusercontent.com/dcharles525/pho/master/data/screenshot1.png</image>
   </screenshot>
 </screenshots>
 
