@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2018 David Johnson Pho -->
-<component type="desktop-application">
-  <id>com.github.dcharles525.pho</id>
-  <metadata_license>CC0-1.0</metadata_license>
+<!-- Copyright 2018 David Johnson <dcharles525@gmail.com> -->
+<component type="desktop">
+  <id>com.github.dcharles525.pho.desktop</id>
+  <metadata_license>CC0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>Pho</name>
-  <summary>Pho for 4chan</summary>
+  <summary>Pho for 4chan.</summary>
   <description>
-    <p>Enjoy a feed like experience for 4chan!</p>
+    <p>Browser 4chan like never before with amazing GTK+ and Vala technologies!</p>
+    <ul>
+      <li>Browse your favorite boards!</li>
+      <li>Read multiple threads at once!</li>
+      <li>See images, videos, and gifs!</li>
+    </ul>
   </description>
   <provides>
     <binary>com.github.dcharles525.pho</binary>
   </provides>
-  <releases>
-    <release version="1.0.0" date="2018-9-15">
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/dcharles525/pho/master/data/screenshot.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/dcharles525/pho/master/data/screenshot2.png</image>
+    </screenshot>
+    <screenshot>
+  </screenshots>
+
+  ​<releases>
+
+    <release version="1.0.0" date="2018-06-02">
       <description>
-        <p>Browse any board on 4chan!</p>
+        <p>Initial release</p>
       </description>
-  </release>
-  <developer_name>phomaker</developer_name>
+    </release>
+
+  </releases>
+
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
@@ -36,32 +55,27 @@
     <content_attribute id="sex-homosexuality">none</content_attribute>
     <content_attribute id="sex-prostitution">none</content_attribute>
     <content_attribute id="sex-adultery">none</content_attribute>
-    <content_attribute id="sex-appearance">moderate</content_attribute>
-    <content_attribute id="language-profanity">moderate</content_attribute>
-    <content_attribute id="language-humor">moderate</content_attribute>
+    <content_attribute id="sex-appearance">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
     <content_attribute id="language-discrimination">none</content_attribute>
-    <content_attribute id="social-chat">moderate</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
     <content_attribute id="social-info">none</content_attribute>
-    <content_attribute id="social-audio">moderate</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
     <content_attribute id="social-location">none</content_attribute>
-    <content_attribute id="social-contacts">intense</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
     <content_attribute id="money-purchasing">none</content_attribute>
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
-  <screenshots>
-    <screenshot type="default">
-      <image>https://raw.githubusercontent.com/dcharles525/pho/master/data/images/screenshot.png</image>
-    </screenshot>
-    <screenshot>
-      <image>https://raw.githubusercontent.com/dcharles525/pho/master/data/images/screenshot2.png</image>
-    </screenshot>
-  </screenshots>
+
   <developer_name>David Johnson</developer_name>
-  <url type="homepage">https://github.com/dcharles525</url>
+  <url type="homepage">https://github.com/dcharles525/pho</url>
   <url type="bugtracker">https://github.com/dcharles525/pho/issues</url>
+
   <custom>
-    <value key="x-appcenter-color-primary">#1d8047</value>
-    <value key="x-appcenter-color-primary-text">#ffffff</value>
+    <value key="x-appcenter-color-primary">#fff</value>
+    <value key="x-appcenter-color-primary-text">#000</value>
     <value key="x-appcenter-suggested-price">3</value>
   </custom>
 </component>
+

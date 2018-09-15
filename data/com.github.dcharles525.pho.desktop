@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Pho
-GenericName=4chan Reader
+GenericName=4chan browser
 Comment=Pho for 4chan
-Categories=Network;
+Categories=Internet;Accessories;
 Exec=com.github.dcharles525.pho
 Icon=com.github.dcharles525.pho
 Terminal=false
 Type=Application
-Keywords=4chan;eos;
+X-GNOME-Gettext-Domain=com.github.dcharles525.pho
+Keywords=4chan;pho;board;thread;images;
+
