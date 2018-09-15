@@ -1,0 +1,78 @@
+Build started at 2018-09-15T10:28:18.224328
+Main binary: /usr/bin/python3
+Python system: Linux
+The Meson build system
+Version: 0.45.0
+Source dir: /media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho
+Build dir: /media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho/build
+Build type: native build
+Project name: com.github.dcharles525.pho
+Sanity testing C compiler: cc
+Is cross compiler: False.
+Sanity check compiler command line: cc /media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho/build/meson-private/sanitycheckc.c -o /media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho/build/meson-private/sanitycheckc.exe
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho/build/meson-private/sanitycheckc.exe
+Native C compiler: cc (gcc 5.4.0 "cc (Ubuntu 5.4.0-6ubuntu1~16.04.10) 5.4.0 20160609")
+Running compile:
+Working directory:  /tmp/tmpknthp9um
+Command line:  valac /tmp/tmpknthp9um/testfile.vala -C -C -o /tmp/tmpknthp9um/output.obj 
+
+Code:
+ class MesonSanityCheck : Object { }
+Compiler stdout:
+ Compilation succeeded - 1 warning(s)
+
+Compiler stderr:
+ warning: --output and -o have no effect when -C or --ccode is set
+
+Native Vala compiler: valac (valac 0.36.15)
+Build machine cpu family: x86_64
+Build machine cpu: x86_64
+Found pkg-config: /usr/bin/pkg-config (0.29.1)
+Determining dependency 'glib-2.0' with pkg-config executable '/usr/bin/pkg-config'
+Native dependency glib-2.0 found: YES 2.48.2
+WARNING: GLib compiled dependencies do not work reliably with 
+the current version of GLib. See the following upstream issue: https://bugzilla.gnome.org/show_bug.cgi?id=774368
+Determining dependency 'gtk+-3.0' with pkg-config executable '/usr/bin/pkg-config'
+Native dependency gtk+-3.0 found: YES 3.18.9
+Determining dependency 'libsoup-2.4' with pkg-config executable '/usr/bin/pkg-config'
+Native dependency libsoup-2.4 found: YES 2.52.2
+Determining dependency 'json-glib-1.0' with pkg-config executable '/usr/bin/pkg-config'
+Native dependency json-glib-1.0 found: YES 1.1.2
+Determining dependency 'webkit2gtk-4.0' with pkg-config executable '/usr/bin/pkg-config'
+Native dependency webkit2gtk-4.0 found: YES 2.20.5
+Determining dependency 'gee-0.8' with pkg-config executable '/usr/bin/pkg-config'
+Native dependency gee-0.8 found: YES 0.20.1
+Program io.elementary.vala-lint found: NO
+data/meson.build:4: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:9: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:4: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:9: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:4: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:9: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:4: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:9: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:4: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:9: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:4: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+data/meson.build:9: WARNING: Passed invalid keyword argument "rename".
+WARNING: This will become a hard error in the future.
+Program meson/post_install.py found: YES (/usr/bin/env python3 /media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho/meson/post_install.py)
+Build targets in project: 3
+Found ninja-1.8.2 at /usr/bin/ninja

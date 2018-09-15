@@ -1,0 +1,9 @@
+# ninja log v5
+0	413	1537021731	com.github.dcharles525.pho@exe/src/Pho.c	c61728fb67c0f99c
+0	413	1537021731	com.github.dcharles525.pho@exe/src/Thread.c	c61728fb67c0f99c
+0	413	1537021731	com.github.dcharles525.pho@exe/src/Posts.c	c61728fb67c0f99c
+414	526	1537021731	com.github.dcharles525.pho@exe/meson-generated_src_Thread.c.o	d6b96987302fdd5
+413	533	1537021731	com.github.dcharles525.pho@exe/meson-generated_src_Posts.c.o	d7b290bed78256ba
+413	815	1537021731	com.github.dcharles525.pho@exe/meson-generated_src_Pho.c.o	15c87df90035a215
+818	1095	1537021732	com.github.dcharles525.pho	cf98f05833e66ac1
+3	343	0	meson-install	473e35c6f0da660

@@ -1,0 +1,22 @@
+[
+  {
+    "directory": "/media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho/build",
+    "command": "valac -C --debug --pkg gee-0.8 --pkg webkit2gtk-4.0 --pkg json-glib-1.0 --pkg libsoup-2.4 --pkg gtk+-3.0 --directory com.github.dcharles525.pho@exe --basedir ../ ../src/Pho.vala ../src/Thread.vala ../src/Posts.vala",
+    "file": "../src/Pho.vala"
+  },
+  {
+    "directory": "/media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho/build",
+    "command": "cc  -Icom.github.dcharles525.pho@exe -I. -I.. -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/mirclient -I/usr/include/mircore -I/usr/include/mircookie -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng12 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/json-glib-1.0 -I/usr/include/webkitgtk-4.0 -I/usr/include/gee-0.8 -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -w -O0 -g '-DGETTEXT_PACKAGE=\"com.github.dcharles525.pho\"' -pthread -MD -MQ 'com.github.dcharles525.pho@exe/meson-generated_src_Pho.c.o' -MF 'com.github.dcharles525.pho@exe/meson-generated_src_Pho.c.o.d' -o 'com.github.dcharles525.pho@exe/meson-generated_src_Pho.c.o' -c 'com.github.dcharles525.pho@exe/src/Pho.c'",
+    "file": "com.github.dcharles525.pho@exe/src/Pho.c"
+  },
+  {
+    "directory": "/media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho/build",
+    "command": "cc  -Icom.github.dcharles525.pho@exe -I. -I.. -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/mirclient -I/usr/include/mircore -I/usr/include/mircookie -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng12 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/json-glib-1.0 -I/usr/include/webkitgtk-4.0 -I/usr/include/gee-0.8 -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -w -O0 -g '-DGETTEXT_PACKAGE=\"com.github.dcharles525.pho\"' -pthread -MD -MQ 'com.github.dcharles525.pho@exe/meson-generated_src_Thread.c.o' -MF 'com.github.dcharles525.pho@exe/meson-generated_src_Thread.c.o.d' -o 'com.github.dcharles525.pho@exe/meson-generated_src_Thread.c.o' -c 'com.github.dcharles525.pho@exe/src/Thread.c'",
+    "file": "com.github.dcharles525.pho@exe/src/Thread.c"
+  },
+  {
+    "directory": "/media/dcharles/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Pho/build",
+    "command": "cc  -Icom.github.dcharles525.pho@exe -I. -I.. -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/mirclient -I/usr/include/mircore -I/usr/include/mircookie -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng12 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/json-glib-1.0 -I/usr/include/webkitgtk-4.0 -I/usr/include/gee-0.8 -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -w -O0 -g '-DGETTEXT_PACKAGE=\"com.github.dcharles525.pho\"' -pthread -MD -MQ 'com.github.dcharles525.pho@exe/meson-generated_src_Posts.c.o' -MF 'com.github.dcharles525.pho@exe/meson-generated_src_Posts.c.o.d' -o 'com.github.dcharles525.pho@exe/meson-generated_src_Posts.c.o' -c 'com.github.dcharles525.pho@exe/src/Posts.c'",
+    "file": "com.github.dcharles525.pho@exe/src/Posts.c"
+  }
+]
