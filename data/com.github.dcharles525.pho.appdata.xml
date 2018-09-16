@@ -5,9 +5,9 @@
   <metadata_license>CC0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>Pho</name>
-  <summary>Pho for 4chan.</summary>
+  <summary>Pho for 4chan</summary>
   <description>
-    <p>Browser 4chan like never before with amazing GTK+ and Vala technologies!</p>
+    <p>Browser 4chan like never before with amazing GTK+ and Vala technologies! Explore the wonders of /g/ or /news/, or any of the dozens of 4chan boards!</p>
     <ul>
       <li>Browse your favorite boards!</li>
       <li>Read multiple threads at once!</li>
@@ -25,7 +25,6 @@
     <screenshot>
       <image>https://raw.githubusercontent.com/dcharles525/pho/master/data/screenshot2.png</image>
     </screenshot>
-    <screenshot>
   </screenshots>
 
   ​<releases>
