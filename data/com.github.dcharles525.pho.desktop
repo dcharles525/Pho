@@ -2,7 +2,7 @@
 Name=Pho
 GenericName=4chan browser
 Comment=Pho for 4chan
-Categories=Internet;Accessories;
+Categories=GNOME;GTK;Network;
 Exec=com.github.dcharles525.pho
 Icon=com.github.dcharles525.pho
 Terminal=false
