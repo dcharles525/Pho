@@ -4,7 +4,7 @@ using Json;
 using WebKit;
 using Gee;
 
-//valac --pkg gtk+-3.0 --pkg libsoup-2.4 --pkg json-glib-1.0 --pkg webkit2gtk-4.0 --pkg glib-2.0 Pho.vala Thread.vala
+//valac --pkg gtk+-3.0 --pkg libsoup-2.4 --pkg json-glib-1.0 --pkg webkit2gtk-4.0 --pkg gee-0.8 Pho.vala Thread.vala Posts.vala
 
 public class Pho{
 
@@ -140,16 +140,24 @@ public class Pho{
       Gdk.RGBA rgba = Gdk.RGBA ();
 		  rgba.parse ("#393f42");
 
-      var webview = new WebKit.WebView();
-      webview.set_background_color(rgba);
-      webview.load_uri("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
-      this.threadList.get(i).getExtension().to_string()));
+      if (this.threadList.get(i).getFilename() != 0 &&
+      this.threadList.get(i).getExtension().to_string() != ".webm"){
 
-      Gtk.ScrolledWindow scrolledImage = new Gtk.ScrolledWindow(null, null);
-      scrolledImage.set_min_content_height(200);
-      scrolledImage.add(webview);
+        var webview = new WebKit.WebView();
+        var webviewSettings = new WebKit.Settings();
+        webviewSettings.set_media_playback_requires_user_gesture(true);
+        webview.set_settings(webviewSettings);
+        webview.set_background_color(rgba);
+        webview.load_uri("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
+        this.threadList.get(i).getExtension().to_string()));
 
-      box.pack_start(scrolledImage, false, false, 0);
+        Gtk.ScrolledWindow scrolledImage = new Gtk.ScrolledWindow(null, null);
+        scrolledImage.set_min_content_height(200);
+        scrolledImage.add(webview);
+        box.pack_start(scrolledImage, false, false, 0);
+
+      }
+
       box.pack_start(threadDateLabel, false, false, 0);
       box.pack_start(threadSubjectLabel, false, false, 0);
       box.pack_start(openThreadButton, false, false, 0);
@@ -245,9 +253,13 @@ public class Pho{
       threadDateLabel.set_max_width_chars(75);
       threadDateLabel.set_alignment(0,0);
 
-      if (this.postList.get(i).getFilename() != 0){
+      if (this.postList.get(i).getFilename() != 0 &&
+      this.postList.get(i).getExtension() != ".webm"){
 
         var webview = new WebKit.WebView();
+        var webviewSettings = new WebKit.Settings();
+        webviewSettings.set_media_playback_requires_user_gesture(true);
+        webview.set_settings(webviewSettings);
         Gdk.RGBA rgba = Gdk.RGBA ();
   		  rgba.parse ("#393f42");
         webview.set_background_color(rgba);
