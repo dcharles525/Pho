@@ -28,7 +28,11 @@
   </screenshots>
 
   ​<releases>
-
+    <release version="1.0.6" date="2018-09-17">
+      <description>
+        <p>Temporarily disabling webms.</p>
+      </description>
+    </release>
     <release version="1.0.0" date="2018-06-02">
       <description>
         <p>Initial release</p>
@@ -77,4 +81,3 @@
     <value key="x-appcenter-suggested-price">3</value>
   </custom>
 </component>
-
