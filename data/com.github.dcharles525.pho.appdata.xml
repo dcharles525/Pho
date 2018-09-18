@@ -28,6 +28,11 @@
   </screenshots>
 
   ​<releases>
+    <release version="1.1.0" date="2018-09-17">
+      <description>
+        <p>Added webms back in via gstreamer.</p>
+      </description>
+    </release>
     <release version="1.0.6" date="2018-09-17">
       <description>
         <p>Temporarily disabling webms.</p>

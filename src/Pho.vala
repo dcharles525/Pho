@@ -3,8 +3,9 @@ using Gtk;
 using Json;
 using WebKit;
 using Gee;
+using Gst;
 
-//valac --pkg gtk+-3.0 --pkg libsoup-2.4 --pkg json-glib-1.0 --pkg webkit2gtk-4.0 --pkg gee-0.8 Pho.vala Thread.vala Posts.vala
+//valac --pkg gtk+-3.0 --pkg libsoup-2.4 --pkg json-glib-1.0 --pkg webkit2gtk-4.0 --pkg gee-0.8 --pkg gstreamer-1.0 Pho.vala Thread.vala Posts.vala
 
 public class Pho{
 
@@ -158,6 +159,39 @@ public class Pho{
 
       }
 
+      if (this.threadList.get(i).getExtension().to_string() == ".webm"){
+
+        Widget videoArea;
+
+        Element playBin = ElementFactory.make ("playbin", "bin");
+        playBin["uri"] = "https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
+        this.threadList.get(i).getExtension().to_string());
+        var gtkSink = ElementFactory.make ("gtksink", "sink");
+        gtkSink.get ("widget", out videoArea);
+        playBin["video-sink"] = gtkSink;
+
+        var playButton = new Button.from_icon_name ("media-playback-start", Gtk.IconSize.BUTTON);
+        playButton.clicked.connect (() => {
+          playBin.set_state(Gst.State.PLAYING);
+        });
+
+        var stopButton = new Button.from_icon_name ("media-playback-stop", Gtk.IconSize.BUTTON);
+        stopButton.clicked.connect (() => {
+          playBin.set_state(Gst.State.READY);
+        });
+
+        var bb = new ButtonBox (Orientation.HORIZONTAL);
+        bb.add (playButton);
+        bb.add (stopButton);
+        videoArea.set_size_request(300,200);
+        var vbox = new Box (Gtk.Orientation.VERTICAL, 0);
+        vbox.pack_start (videoArea);
+
+        box.pack_start(vbox);
+        box.pack_start (bb, false);
+
+      }
+
       box.pack_start(threadDateLabel, false, false, 0);
       box.pack_start(threadSubjectLabel, false, false, 0);
       box.pack_start(openThreadButton, false, false, 0);
@@ -270,6 +304,38 @@ public class Pho{
         scrolledImage.add(webview);
 
         box.pack_start(scrolledImage, false, false, 0);
+
+      }
+
+      if (this.threadList.get(i).getExtension().to_string() == ".webm"){
+
+        Widget videoArea;
+
+        Element playBin = ElementFactory.make ("playbin", "bin");
+        playBin["uri"] = "https://i.4cdn.org/".concat(this.boardGlobal,"/",this.postList.get(i).getFilename().to_string(),this.postList.get(i).getExtension());
+        var gtkSink = ElementFactory.make ("gtksink", "sink");
+        gtkSink.get ("widget", out videoArea);
+        playBin["video-sink"] = gtkSink;
+
+        var playButton = new Button.from_icon_name ("media-playback-start", Gtk.IconSize.BUTTON);
+        playButton.clicked.connect (() => {
+          playBin.set_state(Gst.State.PLAYING);
+        });
+
+        var stopButton = new Button.from_icon_name ("media-playback-stop", Gtk.IconSize.BUTTON);
+        stopButton.clicked.connect (() => {
+          playBin.set_state(Gst.State.READY);
+        });
+
+        var bb = new ButtonBox (Orientation.HORIZONTAL);
+        bb.add (playButton);
+        bb.add (stopButton);
+        videoArea.set_size_request(300,200);
+        var vbox = new Box (Gtk.Orientation.VERTICAL, 0);
+        vbox.pack_start (videoArea);
+
+        box.pack_start(vbox);
+        box.pack_start (bb, false);
 
       }
 
@@ -412,6 +478,7 @@ public class Pho{
 
 int main (string[] args){
   Gtk.init (ref args);
+  Gst.init (ref args);
 
   Pho pho = new Pho();
 

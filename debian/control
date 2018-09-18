@@ -9,7 +9,8 @@ Build-Depends: meson,
                libglib2.0-dev,
                libsoup2.4-dev,
                libwebkit2gtk-4.0-dev,
-               libjson-glib-dev
+               libjson-glib-dev,
+               gstreamer-1.0
 Standards-Version: 3.9.3
 Homepage: https://github.com/dcharles525/pho
 
