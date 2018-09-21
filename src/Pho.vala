@@ -18,6 +18,7 @@ public class Pho{
   public signal void getThreadsSignal();
   public string boardGlobal = "g";
   public Gtk.ComboBoxText comboBox = new Gtk.ComboBoxText ();
+  public Gtk.CssProvider provider = new Gtk.CssProvider();
 
   public void getThreads(){
 
@@ -105,17 +106,6 @@ public class Pho{
 
   public void displayThreads(){
 
-    Gtk.CssProvider provider = new Gtk.CssProvider();
-    try {
-
-      provider.load_from_path("../data/Application.css");
-
-    } catch (Error e) {
-
-      warning("css didn't load %s",e.message);
-
-    }
-
     this.notebook.remove_page(0);
     Gtk.Box box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
     box.set_spacing(10);
@@ -153,6 +143,7 @@ public class Pho{
         this.spinner.active = true;
         this.getPosts(threadNumber);
       });
+      openThreadButton.get_style_context().add_class("button-color");
 
       Gdk.RGBA rgba = Gdk.RGBA ();
 		  rgba.parse ("#393f42");
@@ -218,7 +209,9 @@ public class Pho{
     scrolled.set_min_content_width(350);
     scrolled.set_min_content_height(500);
     scrolled.add(box);
+
     Gtk.Label title = new Gtk.Label ("Board");
+    this.notebook.get_style_context().add_class("padding");
     this.notebook.append_page (scrolled, title);
     this.spinner.active = false;
 
@@ -226,6 +219,7 @@ public class Pho{
 
   public void getPosts(int64 threadNumber){
 
+    this.spinner = new Gtk.Spinner();
     this.spinner.active = true;
     this.postList.clear ();
 
@@ -283,19 +277,6 @@ public class Pho{
     box.set_spacing(10);
 
     for (int i = 0; i < this.postList.size; i++){
-
-      Gtk.CssProvider provider = new Gtk.CssProvider();
-      try {
-
-        provider.load_from_path("../data/Application.css");
-
-      } catch (Error e) {
-
-        warning("css didn't load %s",e.message);
-
-      }
-
-      Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),provider,Gtk.STYLE_PROVIDER_PRIORITY_USER);
 
       var com = this.postList.get(i).getComment();
       com = com.replace ("<br>", "\n");
@@ -434,6 +415,7 @@ public class Pho{
     header.title = windowTitle;
     header.show_close_button = true;
     header.pack_start(closeThreadButton);
+    header.pack_end(this.spinner);
     header.show_all ();
     this.window.set_titlebar(header);
 
@@ -446,7 +428,7 @@ public class Pho{
 
   public void headerCheck(){
 
-    if (notebook.get_n_pages() == 1){
+    if (this.notebook.get_n_pages() == 1){
 
       Gtk.Image refreshImage = new Gtk.Image.from_icon_name ("view-refresh", Gtk.IconSize.SMALL_TOOLBAR);
       Gtk.ToolButton refreshButton = new Gtk.ToolButton (refreshImage, null);
@@ -461,6 +443,7 @@ public class Pho{
       header.show_close_button = true;
       header.pack_start (refreshButton);
       header.pack_start (this.comboBox);
+      header.pack_end(this.spinner);
       header.show_all ();
       this.window.set_titlebar(header);
 
@@ -515,15 +498,19 @@ public class Pho{
         this.getThreads();
       });
 
-      var header = new Gtk.HeaderBar ();
-      var windowTitle = "Pho";
-      header.title = windowTitle;
-      header.show_close_button = true;
-      header.pack_start (refreshButton);
-      header.pack_start (this.comboBox);
-      header.show_all ();
+      if (this.notebook.get_n_pages() == 1){
 
-      this.window.set_titlebar(header);
+        var header = new Gtk.HeaderBar ();
+        var windowTitle = "Pho";
+        header.title = windowTitle;
+        header.show_close_button = true;
+        header.pack_start (refreshButton);
+        header.pack_start (this.comboBox);
+        header.show_all ();
+
+        this.window.set_titlebar(header);
+
+      }
 
 		}catch {
 
@@ -539,6 +526,18 @@ int main (string[] args){
   Gst.init (ref args);
 
   Pho pho = new Pho();
+
+  try {
+
+    pho.provider.load_from_path("../data/Application.css");
+
+  } catch (Error e) {
+
+    warning("css didn't load %s",e.message);
+
+  }
+
+  Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),pho.provider,Gtk.STYLE_PROVIDER_PRIORITY_USER);
 
   var windowTitle = "Pho";
   pho.window.title = windowTitle;
