@@ -105,17 +105,32 @@ public class Pho{
 
   public void displayThreads(){
 
+    Gtk.CssProvider provider = new Gtk.CssProvider();
+    try {
+
+      provider.load_from_path("../data/Application.css");
+
+    } catch (Error e) {
+
+      warning("css didn't load %s",e.message);
+
+    }
+
     this.notebook.remove_page(0);
     Gtk.Box box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-    box.set_spacing(15);
+    box.set_spacing(10);
+    box.get_style_context().add_class("padding");
     Gtk.ScrolledWindow scrolled = new Gtk.ScrolledWindow (null, null);
 
     for (int i = 0; i < this.threadList.size; i++){
 
-      var allTags = new Regex("<(.|\n)*?>", RegexCompileFlags.CASELESS);
-      var sub = allTags.replace(this.threadList.get(i).getSubject(), -1, 0, "");
+      var sub = this.threadList.get(i).getSubject();
+      sub = sub.replace ("<br>", "\n");
+      var allTags = new Regex("<(.|)*?>", RegexCompileFlags.CASELESS);
+      sub = allTags.replace(sub, -1, 0, "");
 
       var threadSubjectLabel = new Gtk.Label(sub);
+      threadSubjectLabel.set_selectable(true);
       threadSubjectLabel.set_use_markup(true);
       threadSubjectLabel.set_line_wrap(true);
       threadSubjectLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
@@ -129,6 +144,7 @@ public class Pho{
       threadDateLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
       threadDateLabel.set_max_width_chars(75);
       threadDateLabel.set_alignment(0,0);
+      threadDateLabel.get_style_context().add_class("blue-text");
 
       var threadNumber = this.threadList.get(i).getThreadNumber();
 
@@ -246,13 +262,13 @@ public class Pho{
 
         }
 
-        loop.quit();
-
 
 
       }catch(Error e){
 
       }
+
+      loop.quit();
 
     });
 
@@ -268,16 +284,57 @@ public class Pho{
 
     for (int i = 0; i < this.postList.size; i++){
 
-      var allTags = new Regex("<(.|\n)*?>", RegexCompileFlags.CASELESS);
-      var com = allTags.replace(this.postList.get(i).getComment(), -1, 0, "");
+      Gtk.CssProvider provider = new Gtk.CssProvider();
+      try {
 
-      var label = new Gtk.Label(com);
-      label.set_max_width_chars(80);
-      label.set_use_markup (true);
-      label.set_line_wrap (true);
-      label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-      label.set_justify(Gtk.Justification.LEFT);
-      label.set_alignment(0,0);
+        provider.load_from_path("../data/Application.css");
+
+      } catch (Error e) {
+
+        warning("css didn't load %s",e.message);
+
+      }
+
+      Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),provider,Gtk.STYLE_PROVIDER_PRIORITY_USER);
+
+      var com = this.postList.get(i).getComment();
+      com = com.replace ("<br>", "\n");
+      var allTags = new Regex("<[^>]*>", RegexCompileFlags.CASELESS);
+      com = allTags.replace(com, -1, 0, "");
+
+      var commentArray = com.split("\n");
+      var commentBox = new Box (Gtk.Orientation.VERTICAL, 0);
+
+      for (int f = 0; f < commentArray.length; f++){
+
+        var commentLabel = new Gtk.Label(commentArray[f]);
+        commentLabel.set_selectable(true);
+        commentLabel.set_max_width_chars(80);
+        commentLabel.set_use_markup (true);
+        commentLabel.set_line_wrap (true);
+        commentLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+        commentLabel.set_justify(Gtk.Justification.LEFT);
+        commentLabel.set_alignment(0,0);
+
+        Regex regexImpliesDouble = new Regex ("&gt;&gt;");
+
+        if (regexImpliesDouble.match (commentArray[f])){
+
+          commentLabel.get_style_context().add_class("green-text");
+
+        }
+
+        Regex regexImpliesSingle = new Regex ("&gt;");
+
+        if (regexImpliesSingle.match (commentArray[f])){
+
+          commentLabel.get_style_context().add_class("green-text");
+
+        }
+
+        commentBox.pack_start (commentLabel, false, false, 0);
+
+      }
 
       var threadDateLabel = new Gtk.Label(this.postList.get(i).getDate()
       .concat(" - ",this.postList.get(i).getPostNumber().to_string()));
@@ -286,6 +343,7 @@ public class Pho{
       threadDateLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
       threadDateLabel.set_max_width_chars(75);
       threadDateLabel.set_alignment(0,0);
+      threadDateLabel.get_style_context().add_class("blue-text");
 
       if (this.postList.get(i).getFilename() != 0 &&
       this.postList.get(i).getExtension() != ".webm"){
@@ -307,7 +365,7 @@ public class Pho{
 
       }
 
-      if (this.threadList.get(i).getExtension().to_string() == ".webm"){
+      if (this.postList.get(i).getExtension().to_string() == ".webm"){
 
         Widget videoArea;
 
@@ -340,7 +398,7 @@ public class Pho{
       }
 
       box.pack_start (threadDateLabel, false, false, 0);
-      box.pack_start (label, false, false, 0);
+      box.pack_start (commentBox, false, false, 0);
       var hseparator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
       box.pack_start(hseparator, false, false, 0);
 
@@ -484,7 +542,6 @@ int main (string[] args){
 
   var windowTitle = "Pho";
   pho.window.title = windowTitle;
-  pho.window.set_border_width (10);
   pho.window.set_position (Gtk.WindowPosition.CENTER);
   pho.window.destroy.connect (Gtk.main_quit);
   pho.window.set_default_size (550, 800);
