@@ -19,6 +19,28 @@ public class Pho{
   public string boardGlobal = "g";
   public Gtk.ComboBoxText comboBox = new Gtk.ComboBoxText ();
   public Gtk.CssProvider provider = new Gtk.CssProvider();
+  public string CODE_STYLE = """
+    .green-text{
+      color: #b5bd68;
+    }
+
+    .blue-text{
+      color: #81a2be;
+    }
+
+    .white-text{
+      color: #fff;
+    }
+
+    .padding{
+      padding: 5px;
+    }
+
+    .button-color{
+      background-image: linear-gradient( #1c9cc4, #1c8dc4);
+    }
+  """;
+
 
   public void getThreads(){
 
@@ -527,17 +549,18 @@ int main (string[] args){
 
   Pho pho = new Pho();
 
+  Gtk.Settings.get_default().set("gtk-application-prefer-dark-theme", true);
+
   try {
 
-    pho.provider.load_from_path("../data/Application.css");
+    pho.provider.load_from_data (pho.CODE_STYLE, pho.CODE_STYLE.length);
+    Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), pho.provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   } catch (Error e) {
 
     warning("css didn't load %s",e.message);
 
   }
-
-  Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),pho.provider,Gtk.STYLE_PROVIDER_PRIORITY_USER);
 
   var windowTitle = "Pho";
   pho.window.title = windowTitle;

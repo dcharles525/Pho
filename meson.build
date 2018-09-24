@@ -2,6 +2,12 @@ project ('com.github.dcharles525.pho', 'vala', 'c')
 
 gnome = import ('gnome')
 
+asresources = gnome.compile_resources(
+  'as-resources', 'data/' + meson.project_name() + '.gresource.xml',
+  source_dir: 'data',
+  c_name: 'as'
+)
+
 add_global_arguments ('-DGETTEXT_PACKAGE="' + meson.project_name () + '"', language:'c')
 
 executable(
@@ -9,6 +15,7 @@ executable(
     'src/Pho.vala',
     'src/Thread.vala',
     'src/Posts.vala',
+    asresources,
     dependencies: [
       dependency('gtk+-3.0'),
       dependency('libsoup-2.4'),
