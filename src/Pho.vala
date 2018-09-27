@@ -19,6 +19,7 @@ public class Pho{
   public string boardGlobal = "g";
   public Gtk.ComboBoxText comboBox = new Gtk.ComboBoxText ();
   public Gtk.CssProvider provider = new Gtk.CssProvider();
+  public bool refreshPostsGlobal = false;
   public string CODE_STYLE = """
     .green-text{
       color: #b5bd68;
@@ -40,7 +41,6 @@ public class Pho{
       background-image: linear-gradient( #1c9cc4, #1c8dc4);
     }
   """;
-
 
   public void getThreads(){
 
@@ -228,14 +228,15 @@ public class Pho{
 
     }
 
-    scrolled.set_min_content_width(350);
+    scrolled.set_min_content_width(300);
     scrolled.set_min_content_height(500);
     scrolled.add(box);
 
     Gtk.Label title = new Gtk.Label ("Board");
     this.notebook.get_style_context().add_class("padding");
-    this.notebook.append_page (scrolled, title);
+    this.notebook.insert_page (scrolled, title,0);
     this.spinner.active = false;
+    this.notebook.set_current_page(0);
 
   }
 
@@ -290,6 +291,7 @@ public class Pho{
 
     loop.run();
     this.dispayPosts(threadNumber);
+    this.spinner.active = false;
 
   }
 
@@ -408,41 +410,28 @@ public class Pho{
     }
 
     Gtk.ScrolledWindow scrolled = new Gtk.ScrolledWindow (null, null);
-    scrolled.set_min_content_width(350);
+    scrolled.set_min_content_width(300);
     scrolled.set_min_content_height(500);
     scrolled.add(box);
 
-    Gtk.Button closeThreadButton = new Gtk.Button.with_label ("Close");
-    closeThreadButton.clicked.connect (() => {
+    Gtk.Label title = new Gtk.Label (threadNumber.to_string());
 
-      int currentPage = notebook.get_current_page();
+    if (this.refreshPostsGlobal){
 
-      if (currentPage != 0){
+      int tempPage = this.notebook.get_current_page();
+      this.notebook.insert_page (scrolled, title, this.notebook.get_current_page());
+      this.notebook.remove_page(this.notebook.get_current_page());
+      this.notebook.show_all();
+      this.notebook.set_current_page(tempPage);
+      this.refreshPostsGlobal = false;
 
-        notebook.remove_page(currentPage);
+    }else{
 
-      }else{
+      this.notebook.append_page (scrolled, title);
 
-        currentPage++;
-        notebook.remove_page(currentPage);
+    }
 
-      }
 
-      this.getBoards();
-
-    });
-
-    var header = new Gtk.HeaderBar ();
-    var windowTitle = "Pho";
-    header.title = windowTitle;
-    header.show_close_button = true;
-    header.pack_start(closeThreadButton);
-    header.pack_end(this.spinner);
-    header.show_all ();
-    this.window.set_titlebar(header);
-
-    Gtk.Label title = new Gtk.Label (threadNumber.to_string().concat(" - ",this.boardGlobal));
-    this.notebook.append_page (scrolled, title);
     this.notebook.show_all();
     this.spinner.active = false;
 
@@ -452,11 +441,25 @@ public class Pho{
 
     if (this.notebook.get_n_pages() == 1){
 
-      Gtk.Image refreshImage = new Gtk.Image.from_icon_name ("view-refresh", Gtk.IconSize.SMALL_TOOLBAR);
+      Gtk.Image refreshImage = new Gtk.Image.from_icon_name ("view-refresh-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
       Gtk.ToolButton refreshButton = new Gtk.ToolButton (refreshImage, null);
       refreshButton.clicked.connect (() => {
+
+        int currentPage = this.notebook.get_current_page();
         this.spinner.active = true;
-        this.getThreads();
+
+        if (currentPage == 0){
+
+          this.getThreads();
+
+        }else{
+
+          var childPage = this.notebook.get_nth_page(currentPage);
+          this.refreshPostsGlobal = true;
+          this.getPosts((int64)this.notebook.get_tab_label_text(childPage).to_int());
+
+        }
+
       });
 
       var header = new Gtk.HeaderBar ();
@@ -513,11 +516,45 @@ public class Pho{
         this.getThreads();
   		});
 
-      Gtk.Image refreshImage = new Gtk.Image.from_icon_name ("view-refresh", Gtk.IconSize.SMALL_TOOLBAR);
+      Gtk.Button closeThreadButton = new Gtk.Button.from_icon_name ("edit-clear-all-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+      closeThreadButton.clicked.connect (() => {
+
+        int currentPage = notebook.get_current_page();
+
+        if (currentPage != 0){
+
+          notebook.remove_page(currentPage);
+
+        }else{
+
+          currentPage++;
+          notebook.remove_page(currentPage);
+
+        }
+
+        this.getBoards();
+
+      });
+
+      Gtk.Image refreshImage = new Gtk.Image.from_icon_name ("view-refresh-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
       Gtk.ToolButton refreshButton = new Gtk.ToolButton (refreshImage, null);
       refreshButton.clicked.connect (() => {
+
+        int currentPage = this.notebook.get_current_page();
         this.spinner.active = true;
-        this.getThreads();
+
+        if (currentPage == 0){
+
+          this.getThreads();
+
+        }else{
+
+          var childPage = this.notebook.get_nth_page(currentPage);
+          this.refreshPostsGlobal = true;
+          this.getPosts((int64)this.notebook.get_tab_label_text(childPage).to_int());
+
+        }
+
       });
 
       if (this.notebook.get_n_pages() == 1){
@@ -527,7 +564,9 @@ public class Pho{
         header.title = windowTitle;
         header.show_close_button = true;
         header.pack_start (refreshButton);
-        header.pack_start (this.comboBox);
+        header.pack_start (closeThreadButton);
+        header.pack_end (this.comboBox);
+        header.pack_end(this.spinner);
         header.show_all ();
 
         this.window.set_titlebar(header);
@@ -566,21 +605,56 @@ int main (string[] args){
   pho.window.title = windowTitle;
   pho.window.set_position (Gtk.WindowPosition.CENTER);
   pho.window.destroy.connect (Gtk.main_quit);
-  pho.window.set_default_size (550, 800);
+  pho.window.set_default_size (515, 775);
 
   pho.spinner.active = true;
 
-  Gtk.Image img = new Gtk.Image.from_icon_name ("view-refresh", Gtk.IconSize.SMALL_TOOLBAR);
+  Gtk.Image img = new Gtk.Image.from_icon_name ("view-refresh-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
   Gtk.ToolButton refreshButton = new Gtk.ToolButton (img, null);
   refreshButton.clicked.connect (() => {
+
+    int currentPage = pho.notebook.get_current_page();
     pho.spinner.active = true;
-    pho.getThreads();
+
+    if (currentPage == 0){
+
+      pho.getThreads();
+
+    }else{
+
+      var childPage = pho.notebook.get_nth_page(currentPage);
+      pho.refreshPostsGlobal = true;
+      pho.getPosts((int64)pho.notebook.get_tab_label_text(childPage).to_int());
+
+    }
+
+  });
+
+  Gtk.Button closeThreadButton = new Gtk.Button.from_icon_name ("edit-clear-all-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+  closeThreadButton.clicked.connect (() => {
+
+    int currentPage = pho.notebook.get_current_page();
+
+    if (currentPage != 0){
+
+      pho.notebook.remove_page(currentPage);
+
+    }else{
+
+      currentPage++;
+      pho.notebook.remove_page(currentPage);
+
+    }
+
+    pho.getBoards();
+
   });
 
   var header = new Gtk.HeaderBar ();
   header.show_close_button = true;
   header.title = windowTitle;
   header.pack_start (refreshButton);
+  header.pack_start (closeThreadButton);
   header.pack_end(pho.spinner);
   header.show_all();
   pho.window.set_titlebar(header);
