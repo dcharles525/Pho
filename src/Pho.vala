@@ -437,45 +437,6 @@ public class Pho{
 
   }
 
-  public void headerCheck(){
-
-    if (this.notebook.get_n_pages() == 1){
-
-      Gtk.Image refreshImage = new Gtk.Image.from_icon_name ("view-refresh-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
-      Gtk.ToolButton refreshButton = new Gtk.ToolButton (refreshImage, null);
-      refreshButton.clicked.connect (() => {
-
-        int currentPage = this.notebook.get_current_page();
-        this.spinner.active = true;
-
-        if (currentPage == 0){
-
-          this.getThreads();
-
-        }else{
-
-          var childPage = this.notebook.get_nth_page(currentPage);
-          this.refreshPostsGlobal = true;
-          this.getPosts((int64)this.notebook.get_tab_label_text(childPage).to_int());
-
-        }
-
-      });
-
-      var header = new Gtk.HeaderBar ();
-      var windowTitle = "Pho";
-      header.title = windowTitle;
-      header.show_close_button = true;
-      header.pack_start (refreshButton);
-      header.pack_start (this.comboBox);
-      header.pack_end(this.spinner);
-      header.show_all ();
-      this.window.set_titlebar(header);
-
-    }
-
-  }
-
   public void getBoards(){
 
     this.comboBox = new Gtk.ComboBoxText ();
