@@ -28,6 +28,15 @@
   </screenshots>
 
   ​<releases>
+    <release version="1.2.0" date="2018-09-28">
+      <description>
+        <p>Fixed the header to be more clean and stable.</p>
+        <p>Made the UI a lot nicer and a bit smoother.</p>
+        <p>Added CTRL-Q to close the app and CTRL-W to close a thread.</p>
+        <p>Started working on search functionality.</p>
+        <p>Fixed lots of bugs.</p>
+      </description>
+    </release>
     <release version="1.1.0" date="2018-09-17">
       <description>
         <p>Added webms back in via gstreamer.</p>

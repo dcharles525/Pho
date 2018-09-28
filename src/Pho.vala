@@ -14,11 +14,14 @@ public class Pho{
   public Gtk.Window window = new Gtk.Window();
   public Gtk.Notebook notebook = new Gtk.Notebook();
   public Gtk.Spinner spinner = new Gtk.Spinner();
+  public Gtk.SearchEntry searchEntry = new Gtk.SearchEntry ();
+  public Gtk.Revealer revealerGlobal = new Gtk.Revealer ();
   public signal void initSignal();
   public signal void getThreadsSignal();
   public string boardGlobal = "g";
   public Gtk.ComboBoxText comboBox = new Gtk.ComboBoxText ();
   public Gtk.CssProvider provider = new Gtk.CssProvider();
+  public Gtk.Box threadBox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
   public bool refreshPostsGlobal = false;
   public string CODE_STYLE = """
     .green-text{
@@ -129,9 +132,10 @@ public class Pho{
   public void displayThreads(){
 
     this.notebook.remove_page(0);
-    Gtk.Box box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-    box.set_spacing(10);
-    box.get_style_context().add_class("padding");
+    this.threadBox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+    threadBox.set_spacing(10);
+    threadBox.get_style_context().add_class("padding");
+    threadBox.pack_start(this.revealerGlobal);
     Gtk.ScrolledWindow scrolled = new Gtk.ScrolledWindow (null, null);
 
     for (int i = 0; i < this.threadList.size; i++){
@@ -184,7 +188,7 @@ public class Pho{
         Gtk.ScrolledWindow scrolledImage = new Gtk.ScrolledWindow(null, null);
         scrolledImage.set_min_content_height(200);
         scrolledImage.add(webview);
-        box.pack_start(scrolledImage, false, false, 0);
+        threadBox.pack_start(scrolledImage, false, false, 0);
 
       }
 
@@ -216,21 +220,21 @@ public class Pho{
         var vbox = new Box (Gtk.Orientation.VERTICAL, 0);
         vbox.pack_start (videoArea);
 
-        box.pack_start(vbox);
-        box.pack_start (bb, false);
+        threadBox.pack_start(vbox);
+        threadBox.pack_start (bb, false);
 
       }
 
-      box.pack_start(threadDateLabel, false, false, 0);
-      box.pack_start(threadSubjectLabel, false, false, 0);
-      box.pack_start(openThreadButton, false, false, 0);
-      box.pack_start(new Gtk.Separator(Gtk.Orientation.HORIZONTAL), false, false, 0);
+      threadBox.pack_start(threadDateLabel, false, false, 0);
+      threadBox.pack_start(threadSubjectLabel, false, false, 0);
+      threadBox.pack_start(openThreadButton, false, false, 0);
+      threadBox.pack_start(new Gtk.Separator(Gtk.Orientation.HORIZONTAL), false, false, 0);
 
     }
 
     scrolled.set_min_content_width(300);
     scrolled.set_min_content_height(500);
-    scrolled.add(box);
+    scrolled.add(threadBox);
 
     Gtk.Label title = new Gtk.Label ("Board");
     this.notebook.get_style_context().add_class("padding");
@@ -242,7 +246,6 @@ public class Pho{
 
   public void getPosts(int64 threadNumber){
 
-    this.spinner = new Gtk.Spinner();
     this.spinner.active = true;
     this.postList.clear ();
 
@@ -291,7 +294,6 @@ public class Pho{
 
     loop.run();
     this.dispayPosts(threadNumber);
-    this.spinner.active = false;
 
   }
 
@@ -493,8 +495,6 @@ public class Pho{
 
         }
 
-        this.getBoards();
-
       });
 
       Gtk.Image refreshImage = new Gtk.Image.from_icon_name ("view-refresh-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
@@ -520,12 +520,13 @@ public class Pho{
 
       if (this.notebook.get_n_pages() == 1){
 
+        this.spinner = new Gtk.Spinner();;
+
         var header = new Gtk.HeaderBar ();
-        var windowTitle = "Pho";
-        header.title = windowTitle;
         header.show_close_button = true;
         header.pack_start (refreshButton);
         header.pack_start (closeThreadButton);
+        header.pack_start(this.searchEntry);
         header.pack_end (this.comboBox);
         header.pack_end(this.spinner);
         header.show_all ();
@@ -571,6 +572,8 @@ int main (string[] args){
   bool ctrBool = false;
   bool qBool = false;
   bool wBool = false;
+  bool fBool = false;
+  bool escBool = false;
 
   pho.window.key_press_event.connect ((event) => {
 
@@ -589,6 +592,18 @@ int main (string[] args){
     if (event.keyval == Gdk.Key.w){
 
       wBool = true;
+
+    }
+
+    if (event.keyval == Gdk.Key.f){
+
+      fBool = true;
+
+    }
+
+    if (event.keyval == Gdk.Key.Escape){
+
+      escBool = true;
 
     }
 
@@ -615,7 +630,25 @@ int main (string[] args){
 
     }
 
-    return true;
+    if (ctrBool && fBool){
+
+      //pho.revealerGlobal.set_reveal_child(true);
+      pho.searchEntry.grab_focus();
+      ctrBool = false;
+      fBool = false;
+      pho.spinner.active = false;
+
+    }
+
+    if (escBool){
+
+      pho.revealerGlobal.set_reveal_child(false);
+      pho.spinner.active = false;
+      escBool = false;
+
+    }
+
+    return false;
 
   });
 
@@ -658,9 +691,17 @@ int main (string[] args){
 
     }
 
-    pho.getBoards();
-
   });
+
+
+  pho.searchEntry = new Gtk.SearchEntry ();
+  pho.searchEntry.set_placeholder_text("Enter search text...");
+  pho.searchEntry.activate.connect (() => {
+    var text = pho.searchEntry.get_text();
+    stdout.printf("%s\n", text);
+  });
+
+  pho.revealerGlobal.add(pho.searchEntry);
 
   var header = new Gtk.HeaderBar ();
   header.show_close_button = true;
@@ -670,7 +711,6 @@ int main (string[] args){
   header.pack_end(pho.spinner);
   header.show_all();
   pho.window.set_titlebar(header);
-
   pho.window.show_all();
 
   pho.getThreadsSignal.connect(() => {
