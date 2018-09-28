@@ -568,6 +568,57 @@ int main (string[] args){
   pho.window.destroy.connect (Gtk.main_quit);
   pho.window.set_default_size (515, 775);
 
+  bool ctrBool = false;
+  bool qBool = false;
+  bool wBool = false;
+
+  pho.window.key_press_event.connect ((event) => {
+
+    if (event.keyval == Gdk.Key.Control_L){
+
+      ctrBool = true;
+
+    }
+
+    if (event.keyval == Gdk.Key.q){
+
+      qBool = true;
+
+    }
+
+    if (event.keyval == Gdk.Key.w){
+
+      wBool = true;
+
+    }
+
+    if (ctrBool && qBool){
+
+      Gtk.main_quit();
+      ctrBool = false;
+      qBool = false;
+
+    }
+
+    if (ctrBool && wBool){
+
+      int currentPage = pho.notebook.get_current_page();
+
+      if (currentPage != 0){
+
+        pho.notebook.remove_page(currentPage);
+
+      }
+
+      ctrBool = false;
+      wBool = false;
+
+    }
+
+    return true;
+
+  });
+
   pho.spinner.active = true;
 
   Gtk.Image img = new Gtk.Image.from_icon_name ("view-refresh-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
