@@ -135,6 +135,17 @@ public class Pho{
     this.threadBox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
     threadBox.set_spacing(10);
     threadBox.get_style_context().add_class("padding");
+
+    this.searchEntry = new Gtk.SearchEntry ();
+    this.searchEntry.set_placeholder_text("Enter search text...");
+    this.searchEntry.activate.connect (() => {
+
+      this.search(this.searchEntry.get_text());
+
+    });
+
+    this.revealerGlobal.add(this.searchEntry);
+
     threadBox.pack_start(this.revealerGlobal);
     Gtk.ScrolledWindow scrolled = new Gtk.ScrolledWindow (null, null);
 
@@ -542,6 +553,28 @@ public class Pho{
 
   }
 
+  public void search(string search){
+
+    this.spinner.active = true;
+
+    ArrayList<Thread> searchList = new ArrayList<Thread>();
+
+    for (int i = 0; i < this.threadList.size; i++){
+
+      if (this.threadList.get(i).getSubject().contains(search)){
+
+        searchList.add(this.threadList.get(i));
+
+      }
+
+    }
+
+    this.threadList.clear ();
+    this.threadList = searchList;
+    this.getThreadsSignal();
+
+  }
+
 }
 
 int main (string[] args){
@@ -632,7 +665,7 @@ int main (string[] args){
 
     if (ctrBool && fBool){
 
-      //pho.revealerGlobal.set_reveal_child(true);
+      pho.revealerGlobal.set_reveal_child(true);
       pho.searchEntry.grab_focus();
       ctrBool = false;
       fBool = false;
@@ -643,8 +676,9 @@ int main (string[] args){
     if (escBool){
 
       pho.revealerGlobal.set_reveal_child(false);
-      pho.spinner.active = false;
+      pho.spinner.active = true;
       escBool = false;
+      pho.getThreads();
 
     }
 
@@ -692,16 +726,6 @@ int main (string[] args){
     }
 
   });
-
-
-  pho.searchEntry = new Gtk.SearchEntry ();
-  pho.searchEntry.set_placeholder_text("Enter search text...");
-  pho.searchEntry.activate.connect (() => {
-    var text = pho.searchEntry.get_text();
-    stdout.printf("%s\n", text);
-  });
-
-  pho.revealerGlobal.add(pho.searchEntry);
 
   var header = new Gtk.HeaderBar ();
   header.show_close_button = true;
