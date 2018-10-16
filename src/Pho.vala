@@ -257,54 +257,58 @@ public class Pho{
 
   public void getPosts(int64 threadNumber){
 
-    this.spinner.active = true;
-    this.postList.clear ();
+    if (checkThread(threadNumber)){
 
-    MainLoop loop = new MainLoop ();
-    var session = new Soup.Session ();
-    var message = new Soup.Message ("GET", "https://a.4cdn.org/".concat(this.boardGlobal,"/thread/",threadNumber.to_string(),".json"));
+      this.spinner.active = true;
+      this.postList.clear ();
 
-    session.queue_message (message, (sess, message) => {
+      MainLoop loop = new MainLoop ();
+      var session = new Soup.Session ();
+      var message = new Soup.Message ("GET", "https://a.4cdn.org/".concat(this.boardGlobal,"/thread/",threadNumber.to_string(),".json"));
 
-      try {
+      session.queue_message (message, (sess, message) => {
 
-        var parser = new Json.Parser ();
-        parser.load_from_data((string) message.response_body.flatten().data, -1);
-        var root_object = parser.get_root().get_object ();
-        var posts = root_object.get_array_member("posts");
+        try {
 
-        foreach (var post in posts.get_elements()) {
+          var parser = new Json.Parser ();
+          parser.load_from_data((string) message.response_body.flatten().data, -1);
+          var root_object = parser.get_root().get_object ();
+          var posts = root_object.get_array_member("posts");
 
-          var post_object = post.get_object();
-          string com = post_object.has_member("com") ? post_object.get_string_member("com") : "";
-          int64 filename = post_object.has_member("tim") ? post_object.get_int_member("tim") : 0;
-          int64 postNumber = post_object.has_member("no") ? post_object.get_int_member("no") : 0;
-          string ext = post_object.has_member("ext") ? post_object.get_string_member("ext") : "";
-          string date = post_object.has_member("now") ? post_object.get_string_member("now") : "";
+          foreach (var post in posts.get_elements()) {
 
-          Posts tempPost = new Posts();
-          tempPost.setComment(com);
-          tempPost.setFilename(filename);
-          tempPost.setExtension(ext);
-          tempPost.setPostNumber(postNumber);
-          tempPost.setDate(date);
+            var post_object = post.get_object();
+            string com = post_object.has_member("com") ? post_object.get_string_member("com") : "";
+            int64 filename = post_object.has_member("tim") ? post_object.get_int_member("tim") : 0;
+            int64 postNumber = post_object.has_member("no") ? post_object.get_int_member("no") : 0;
+            string ext = post_object.has_member("ext") ? post_object.get_string_member("ext") : "";
+            string date = post_object.has_member("now") ? post_object.get_string_member("now") : "";
 
-          this.postList.add(tempPost);
+            Posts tempPost = new Posts();
+            tempPost.setComment(com);
+            tempPost.setFilename(filename);
+            tempPost.setExtension(ext);
+            tempPost.setPostNumber(postNumber);
+            tempPost.setDate(date);
+
+            this.postList.add(tempPost);
+
+          }
+
+
+
+        }catch(Error e){
 
         }
 
+        loop.quit();
 
+      });
 
-      }catch(Error e){
+      loop.run();
+      this.dispayPosts(threadNumber);
 
-      }
-
-      loop.quit();
-
-    });
-
-    loop.run();
-    this.dispayPosts(threadNumber);
+    }
 
   }
 
@@ -572,6 +576,27 @@ public class Pho{
     this.threadList.clear ();
     this.threadList = searchList;
     this.getThreadsSignal();
+
+  }
+
+  public bool checkThread(int64 threadNumber){
+
+    var pages = this.notebook.get_n_pages();
+
+    for (int i = 0; pages > i; i++){
+
+      var childPage = this.notebook.get_nth_page(i);
+
+      if (threadNumber == (int64)this.notebook.get_tab_label_text(childPage).to_int()){
+
+        this.spinner.active = false;
+        return false;
+
+      }
+
+    }
+
+    return true;
 
   }
 
