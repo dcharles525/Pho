@@ -28,6 +28,11 @@
   </screenshots>
 
   ​<releases>
+    <release version="1.3.0" date="2018-10-16">
+      <description>
+        <p>Basic thread searching.</p>
+      </description>    
+    </release>
     <release version="1.2.0" date="2018-09-28">
       <description>
         <p>Fixed the header to be more clean and stable.</p>
