@@ -243,8 +243,8 @@ public class Pho{
 
     }
 
-    scrolled.set_min_content_width(300);
-    scrolled.set_min_content_height(500);
+    scrolled.set_min_content_width(200);
+    scrolled.set_min_content_height(400);
     scrolled.add(threadBox);
 
     Gtk.Label title = new Gtk.Label ("Board");
@@ -378,11 +378,11 @@ public class Pho{
   		  rgba.parse ("#393f42");
         webview.set_background_color(rgba);
         webview.load_uri("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.postList.get(i).getFilename().to_string(),this.postList.get(i).getExtension()));
-
+        
         Gtk.ScrolledWindow scrolledImage = new Gtk.ScrolledWindow (null, null);
         scrolledImage.set_min_content_height(200);
         scrolledImage.add(webview);
-
+    
         box.pack_start(scrolledImage, false, false, 0);
 
       }
@@ -565,7 +565,7 @@ public class Pho{
 
     for (int i = 0; i < this.threadList.size; i++){
 
-      if (this.threadList.get(i).getSubject().contains(search)){
+      if (this.threadList.get(i).getSubject().down().contains(search.down())){
 
         searchList.add(this.threadList.get(i));
 
@@ -625,7 +625,7 @@ int main (string[] args){
   pho.window.title = windowTitle;
   pho.window.set_position (Gtk.WindowPosition.CENTER);
   pho.window.destroy.connect (Gtk.main_quit);
-  pho.window.set_default_size (515, 775);
+  pho.window.set_default_size (375,625);
 
   bool ctrBool = false;
   bool qBool = false;
