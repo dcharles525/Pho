@@ -15,6 +15,7 @@ executable(
     'src/Pho.vala',
     'src/Thread.vala',
     'src/Posts.vala',
+    'src/VideoPlayer.vala',
     asresources,
     dependencies: [
       dependency('gtk+-3.0'),
@@ -22,7 +23,10 @@ executable(
       dependency('json-glib-1.0'),
       dependency('webkit2gtk-4.0'),
       dependency('gee-0.8'),
-      dependency('gstreamer-1.0')
+      dependency('gstreamer-1.0'),
+      dependency('clutter-1.0'),
+      dependency('clutter-gst-3.0'),
+      dependency('clutter-gtk-1.0')
     ],
     install: true
 )

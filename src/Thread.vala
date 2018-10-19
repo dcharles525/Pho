@@ -6,6 +6,8 @@ public class Thread{
   string date;
   int64 filename;
   int64 threadNumber;
+  int64 replies;
+  int64 images;
 
   public Thread(){
 
@@ -82,6 +84,30 @@ public class Thread{
   public void setThreadNumber(int64 threadNumber){
 
     this.threadNumber = threadNumber;
+
+  }
+
+  public void setReplies(int64 replies){
+  
+    this.replies = replies;
+
+  }
+
+  public int64 getReplies(){
+    
+    return this.replies;
+
+  }
+
+  public void setImages(int64 images){
+  
+    this.images = images;
+
+  }
+
+  public int64 getImages(){
+    
+    return this.images;
 
   }
 

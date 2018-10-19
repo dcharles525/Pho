@@ -82,6 +82,8 @@ public class Pho{
                 string ext = post_object.has_member("ext") ? post_object.get_string_member("ext") : "";
                 int64 threadno = post_object.has_member("no") ? post_object.get_int_member("no") : 0;
                 string date = post_object.has_member("now") ? post_object.get_string_member("now") : "";
+                int64 replies = post_object.has_member("replies") ? post_object.get_int_member("replies") : 0;
+                int64 images = post_object.has_member("images") ? post_object.get_int_member("images") : 0;
 
                 if (threadno.to_string() != "51971506"){
 
@@ -98,6 +100,8 @@ public class Pho{
                   tempThread.setExtension(ext);
                   tempThread.setThreadNumber(threadno);
                   tempThread.setDate(date);
+                  tempThread.setReplies(replies);
+                  tempThread.setImages(images);
 
                   this.threadList.add(tempThread);
 
@@ -155,6 +159,8 @@ public class Pho{
       sub = sub.replace ("<br>", "\n");
       var allTags = new Regex("<(.|)*?>", RegexCompileFlags.CASELESS);
       sub = allTags.replace(sub, -1, 0, "");
+      
+      var threadRepliesImagesLabel = new Gtk.Label("R: ".concat(this.threadList.get(i).getReplies().to_string()," | I: ",this.threadList.get(i).getImages().to_string()));
 
       var threadSubjectLabel = new Gtk.Label(sub);
       threadSubjectLabel.set_selectable(true);
@@ -204,40 +210,38 @@ public class Pho{
       }
 
       if (this.threadList.get(i).getExtension().to_string() == ".webm"){
-
-        Widget videoArea;
-
-        Element playBin = ElementFactory.make ("playbin", "bin");
-        playBin["uri"] = "https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
-        this.threadList.get(i).getExtension().to_string());
-        var gtkSink = ElementFactory.make ("gtksink", "sink");
-        gtkSink.get ("widget", out videoArea);
-        playBin["video-sink"] = gtkSink;
+        
+        var player = new VideoPlayer();
+        player.setUrl("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
+        this.threadList.get(i).getExtension().to_string()));
+        var clutterBox = player.buildPlayer();
 
         var playButton = new Button.from_icon_name ("media-playback-start", Gtk.IconSize.BUTTON);
         playButton.clicked.connect (() => {
-          playBin.set_state(Gst.State.PLAYING);
+          player.playFile();
         });
 
         var stopButton = new Button.from_icon_name ("media-playback-stop", Gtk.IconSize.BUTTON);
         stopButton.clicked.connect (() => {
-          playBin.set_state(Gst.State.READY);
+          player.stopFile();
         });
 
         var bb = new ButtonBox (Orientation.HORIZONTAL);
         bb.add (playButton);
         bb.add (stopButton);
-        videoArea.set_size_request(300,200);
+        
+        clutterBox.set_size_request(150,200);
         var vbox = new Box (Gtk.Orientation.VERTICAL, 0);
-        vbox.pack_start (videoArea);
+        vbox.pack_start (clutterBox);
 
-        threadBox.pack_start(vbox);
-        threadBox.pack_start (bb, false);
+        threadBox.pack_start (vbox, true, true, 0);
+        threadBox.pack_start (bb,  false, false, 0);
 
       }
 
       threadBox.pack_start(threadDateLabel, false, false, 0);
       threadBox.pack_start(threadSubjectLabel, false, false, 0);
+      threadBox.pack_start(threadRepliesImagesLabel, false, false, 0);
       threadBox.pack_start(openThreadButton, false, false, 0);
       threadBox.pack_start(new Gtk.Separator(Gtk.Orientation.HORIZONTAL), false, false, 0);
 
@@ -389,33 +393,31 @@ public class Pho{
 
       if (this.postList.get(i).getExtension().to_string() == ".webm"){
 
-        Widget videoArea;
-
-        Element playBin = ElementFactory.make ("playbin", "bin");
-        playBin["uri"] = "https://i.4cdn.org/".concat(this.boardGlobal,"/",this.postList.get(i).getFilename().to_string(),this.postList.get(i).getExtension());
-        var gtkSink = ElementFactory.make ("gtksink", "sink");
-        gtkSink.get ("widget", out videoArea);
-        playBin["video-sink"] = gtkSink;
+        var player = new VideoPlayer();
+        player.setUrl("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
+        this.threadList.get(i).getExtension().to_string()));
+        var clutterBox = player.buildPlayer();
 
         var playButton = new Button.from_icon_name ("media-playback-start", Gtk.IconSize.BUTTON);
         playButton.clicked.connect (() => {
-          playBin.set_state(Gst.State.PLAYING);
+          player.playFile();
         });
 
         var stopButton = new Button.from_icon_name ("media-playback-stop", Gtk.IconSize.BUTTON);
         stopButton.clicked.connect (() => {
-          playBin.set_state(Gst.State.READY);
+          player.stopFile();
         });
 
         var bb = new ButtonBox (Orientation.HORIZONTAL);
         bb.add (playButton);
         bb.add (stopButton);
-        videoArea.set_size_request(300,200);
+        
+        clutterBox.set_size_request(150,200);
         var vbox = new Box (Gtk.Orientation.VERTICAL, 0);
-        vbox.pack_start (videoArea);
+        vbox.pack_start (clutterBox);
 
-        box.pack_start(vbox);
-        box.pack_start (bb, false);
+        box.pack_start (vbox, true, true, 0);
+        box.pack_start (bb,  false, false, 0);
 
       }
 
@@ -605,6 +607,11 @@ public class Pho{
 int main (string[] args){
   Gtk.init (ref args);
   Gst.init (ref args);
+  GtkClutter.init (ref args);
+  var err = GtkClutter.init (ref args);
+  if (err != Clutter.InitError.SUCCESS) {
+      error ("Could not initalize clutter! "+err.to_string ());
+  }
 
   Pho pho = new Pho();
 
