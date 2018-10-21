@@ -15,6 +15,7 @@ executable(
     'src/Pho.vala',
     'src/Thread.vala',
     'src/Posts.vala',
+    'src/Replies.vala',
     'src/VideoPlayer.vala',
     asresources,
     dependencies: [

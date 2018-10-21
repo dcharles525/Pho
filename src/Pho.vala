@@ -11,6 +11,7 @@ public class Pho{
 
   public ArrayList<Thread> threadList = new ArrayList<Thread>();
   public ArrayList<Posts> postList = new ArrayList<Posts>();
+  public ArrayList<Replies> repliesList = new ArrayList<Replies>();
   public Gtk.Window window = new Gtk.Window();
   public Gtk.Notebook notebook = new Gtk.Notebook();
   public Gtk.Spinner spinner = new Gtk.Spinner();
@@ -260,11 +261,12 @@ public class Pho{
   }
 
   public void getPosts(int64 threadNumber){
-
+  
     if (checkThread(threadNumber)){
 
       this.spinner.active = true;
       this.postList.clear ();
+      this.repliesList.clear ();
 
       MainLoop loop = new MainLoop ();
       var session = new Soup.Session ();
@@ -295,11 +297,28 @@ public class Pho{
             tempPost.setPostNumber(postNumber);
             tempPost.setDate(date);
 
+            com = com.replace ("<br>", "\n");
+            var allTags = new Regex("<[^>]*>", RegexCompileFlags.CASELESS);
+            com = allTags.replace(com, -1, 0, "");
+            var commentArray = com.split("\n");
+
+            Regex regexImpliesDouble = new Regex ("&gt;&gt;");
+
+            if (regexImpliesDouble.match (commentArray[0])){
+
+              string threadNumberTemp = commentArray[0].substring (8, commentArray[0].length - 8); 
+
+              Replies tempReply = new Replies();
+              tempReply.setOriginalPostNumber((int64)threadNumberTemp.to_int64());
+              tempReply.setComment(com);
+
+              this.repliesList.add(tempReply);
+
+            }
+
             this.postList.add(tempPost);
 
           }
-
-
 
         }catch(Error e){
 
@@ -320,9 +339,11 @@ public class Pho{
 
     Gtk.Box box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
     box.set_spacing(10);
+    bool isReplies = false;
 
     for (int i = 0; i < this.postList.size; i++){
-
+      
+      isReplies = false;
       var com = this.postList.get(i).getComment();
       com = com.replace ("<br>", "\n");
       var allTags = new Regex("<[^>]*>", RegexCompileFlags.CASELESS);
@@ -423,6 +444,59 @@ public class Pho{
 
       box.pack_start (threadDateLabel, false, false, 0);
       box.pack_start (commentBox, false, false, 0);
+
+      var revealer = new Gtk.Revealer();
+      Gtk.Box tempBox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+      tempBox.set_spacing(20);
+
+      for (int g = 0; g < this.repliesList.size; g++){
+        
+        if (this.repliesList.get(g).getOriginalPostNumber() == threadNumber){
+
+          var replyLabel = new Gtk.Label(this.repliesList.get(g).getComment());
+          replyLabel.set_use_markup (true);
+          replyLabel.set_line_wrap (true);
+          replyLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+          replyLabel.set_max_width_chars(75);
+          replyLabel.set_alignment(0,0);
+
+          var hseparator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
+
+          tempBox.pack_start(replyLabel);
+          tempBox.pack_start(hseparator);
+
+          revealer.add(tempBox);
+          isReplies = true;
+
+        }
+        
+      }
+
+      box.pack_start(tempBox);
+
+      if (isReplies){
+
+        var getCommentsButton = new Gtk.Button.with_label ("Show Replies");
+        getCommentsButton.get_style_context().add_class("button-color");
+        box.pack_start (getCommentsButton);
+
+        getCommentsButton.clicked.connect (() => {
+          
+          if (revealer.get_reveal_child()){
+            
+            revealer.set_reveal_child(false);
+
+          }else{
+
+            revealer.set_reveal_child(true);
+
+          }          
+
+        });
+
+      }
+      
+      //box.pack_start(revealer, false, false, 0);
       var hseparator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
       box.pack_start(hseparator, false, false, 0);
 
