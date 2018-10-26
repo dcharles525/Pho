@@ -11,7 +11,10 @@ Build-Depends: meson,
                libwebkit2gtk-4.0-dev,
                libjson-glib-dev,
                libgstreamer1.0-dev,
-               libgstreamer-plugins-base1.0-dev
+               libgstreamer-plugins-base1.0-dev,
+               clutter-1.0,
+               clutter-gst-3.0,
+               clutter-gtk-1.0
 Standards-Version: 3.9.3
 Homepage: https://github.com/dcharles525/pho
 
