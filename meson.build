@@ -25,8 +25,8 @@ executable(
       dependency('webkit2gtk-4.0'),
       dependency('gee-0.8'),
       dependency('gstreamer-1.0'),
-      dependency('libclutter-gst-3.0-dev'),
-      dependency('libclutter-gtk-1.0-dev')
+      dependency('clutter-gst-3.0'),
+      dependency('clutter-gtk-1.0')
     ],
     install: true
 )
