@@ -343,7 +343,6 @@ public class Pho{
 
     for (int i = 0; i < this.postList.size; i++){
       
-      isReplies = false;
       var com = this.postList.get(i).getComment();
       com = com.replace ("<br>", "\n");
       var allTags = new Regex("<[^>]*>", RegexCompileFlags.CASELESS);
@@ -447,12 +446,12 @@ public class Pho{
 
       var revealer = new Gtk.Revealer();
       Gtk.Box tempBox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-      tempBox.set_spacing(20);
+      tempBox.set_spacing(10);
 
       for (int g = 0; g < this.repliesList.size; g++){
-        
-        if (this.repliesList.get(g).getOriginalPostNumber() == threadNumber){
 
+        if (this.repliesList.get(g).getOriginalPostNumber() == this.postList.get(i).getPostNumber()){
+          
           var replyLabel = new Gtk.Label(this.repliesList.get(g).getComment());
           replyLabel.set_use_markup (true);
           replyLabel.set_line_wrap (true);
@@ -461,22 +460,22 @@ public class Pho{
           replyLabel.set_alignment(0,0);
 
           var hseparator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
-
-          tempBox.pack_start(replyLabel);
+          
           tempBox.pack_start(hseparator);
+          tempBox.pack_start(replyLabel);
 
-          revealer.add(tempBox);
           isReplies = true;
 
         }
         
       }
 
-      box.pack_start(tempBox);
-
       if (isReplies){
+        
+        revealer.add(tempBox);
+        box.pack_start(revealer);
 
-        var getCommentsButton = new Gtk.Button.with_label ("Show Replies");
+        var getCommentsButton = new Gtk.Button.with_label ("Show/Hide Replies");
         getCommentsButton.get_style_context().add_class("button-color");
         box.pack_start (getCommentsButton);
 
@@ -495,6 +494,8 @@ public class Pho{
         });
 
       }
+
+      isReplies = false;
       
       //box.pack_start(revealer, false, false, 0);
       var hseparator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
