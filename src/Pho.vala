@@ -4,10 +4,11 @@ using Json;
 using WebKit;
 using Gee;
 using Gst;
+using Granite;
 
-//valac --pkg gtk+-3.0 --pkg libsoup-2.4 --pkg json-glib-1.0 --pkg webkit2gtk-4.0 --pkg gee-0.8 --pkg gstreamer-1.0 Pho.vala Thread.vala Posts.vala
+//valac --pkg gtk+-3.0 --pkg libsoup-2.4 --pkg json-glib-1.0 --pkg webkit2gtk-4.0 --pkg gee-0.8 --pkg gstreamer-1.0 --pkg clutter-gst-3.0 --pkg clutter-gtk-1.0 --pkg granite Pho.vala Thread.vala Posts.vala Replies.vala VideoPlayer.vala
 
-public class Pho{
+public class Pho : Gtk.Application{
 
   public ArrayList<Thread> threadList = new ArrayList<Thread>();
   public ArrayList<Posts> postList = new ArrayList<Posts>();
@@ -110,7 +111,8 @@ public class Pho{
 
               }else{
 
-
+                var toast = new Granite.Widgets.Toast ("One or more threads didn't load!");
+                toast.send_notification ();
 
               }
 
@@ -119,6 +121,8 @@ public class Pho{
           }
 
         }catch(Error e){
+          
+          stderr.printf ("Something is wrong in getThreads");
 
         }
 
@@ -158,9 +162,18 @@ public class Pho{
 
       var sub = this.threadList.get(i).getSubject();
       sub = sub.replace ("<br>", "\n");
-      var allTags = new Regex("<(.|)*?>", RegexCompileFlags.CASELESS);
-      sub = allTags.replace(sub, -1, 0, "");
-      
+
+      try {
+
+        var allTags = new Regex("<(.|)*?>", RegexCompileFlags.CASELESS);
+        sub = allTags.replace(sub, -1, 0, "");
+
+      }catch(RegexError e){
+        
+        print ("Error report this on github!: %s\n", e.message);
+
+      }
+
       var threadRepliesImagesLabel = new Gtk.Label("R: ".concat(this.threadList.get(i).getReplies().to_string()," | I: ",this.threadList.get(i).getImages().to_string()));
 
       var threadSubjectLabel = new Gtk.Label(sub);
@@ -169,7 +182,7 @@ public class Pho{
       threadSubjectLabel.set_line_wrap(true);
       threadSubjectLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
       threadSubjectLabel.set_max_width_chars(75);
-      threadSubjectLabel.set_alignment(0,0);
+      threadSubjectLabel.xalign = 0;
 
       var threadDateLabel = new Gtk.Label(this.threadList.get(i).getDate()
       .concat(" - ",this.threadList.get(i).getThreadNumber().to_string()));
@@ -177,7 +190,7 @@ public class Pho{
       threadDateLabel.set_line_wrap(true);
       threadDateLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
       threadDateLabel.set_max_width_chars(75);
-      threadDateLabel.set_alignment(0,0);
+      threadDateLabel.xalign = 0;
       threadDateLabel.get_style_context().add_class("blue-text");
 
       var threadNumber = this.threadList.get(i).getThreadNumber();
@@ -301,26 +314,34 @@ public class Pho{
             var allTags = new Regex("<[^>]*>", RegexCompileFlags.CASELESS);
             com = allTags.replace(com, -1, 0, "");
             var commentArray = com.split("\n");
+            
+            if (commentArray[0] != null){
+              
+              Regex regexImpliesDouble = new Regex ("&gt;&gt;");
 
-            Regex regexImpliesDouble = new Regex ("&gt;&gt;");
+              if (regexImpliesDouble.match (commentArray[0])){
 
-            if (regexImpliesDouble.match (commentArray[0])){
+                string threadNumberTemp = commentArray[0].substring (8, commentArray[0].length - 8); 
 
-              string threadNumberTemp = commentArray[0].substring (8, commentArray[0].length - 8); 
+                Replies tempReply = new Replies();
+                tempReply.setOriginalPostNumber(int64.parse(threadNumberTemp));
+                tempReply.setComment(com);
 
-              Replies tempReply = new Replies();
-              tempReply.setOriginalPostNumber((int64)threadNumberTemp.to_int64());
-              tempReply.setComment(com);
+                this.repliesList.add(tempReply);
 
-              this.repliesList.add(tempReply);
+              }
 
             }
+
+            
 
             this.postList.add(tempPost);
 
           }
 
         }catch(Error e){
+
+          stderr.printf ("Something is wrong in getPosts");
 
         }
 
@@ -344,41 +365,63 @@ public class Pho{
     for (int i = 0; i < this.postList.size; i++){
       
       var com = this.postList.get(i).getComment();
-      com = com.replace ("<br>", "\n");
-      var allTags = new Regex("<[^>]*>", RegexCompileFlags.CASELESS);
-      com = allTags.replace(com, -1, 0, "");
-
-      var commentArray = com.split("\n");
       var commentBox = new Box (Gtk.Orientation.VERTICAL, 0);
 
-      for (int f = 0; f < commentArray.length; f++){
+      if (com != null){
 
-        var commentLabel = new Gtk.Label(commentArray[f]);
-        commentLabel.set_selectable(true);
-        commentLabel.set_max_width_chars(80);
-        commentLabel.set_use_markup (true);
-        commentLabel.set_line_wrap (true);
-        commentLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        commentLabel.set_justify(Gtk.Justification.LEFT);
-        commentLabel.set_alignment(0,0);
+        com = com.replace ("<br>", "\n");
+        
+        try {
 
-        Regex regexImpliesDouble = new Regex ("&gt;&gt;");
+          var allTags = new Regex("<[^>]*>", RegexCompileFlags.CASELESS);
+          com = allTags.replace(com, -1, 0, "");
 
-        if (regexImpliesDouble.match (commentArray[f])){
-
-          commentLabel.get_style_context().add_class("green-text");
+        }catch(RegexError e){
+          
+          print ("Error report this on github!: %s\n", e.message);
 
         }
 
-        Regex regexImpliesSingle = new Regex ("&gt;");
+        var commentArray = com.split("\n");
 
-        if (regexImpliesSingle.match (commentArray[f])){
+        for (int f = 0; f < commentArray.length; f++){
 
-          commentLabel.get_style_context().add_class("green-text");
+          var commentLabel = new Gtk.Label(commentArray[f]);
+          commentLabel.set_selectable(true);
+          commentLabel.set_max_width_chars(80);
+          commentLabel.set_use_markup (true);
+          commentLabel.set_line_wrap (true);
+          commentLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+          commentLabel.set_justify(Gtk.Justification.LEFT);
+          commentLabel.xalign = 0;
+          
+          try {
+
+            Regex regexImpliesDouble = new Regex ("&gt;&gt;");
+
+            if (regexImpliesDouble.match (commentArray[f])){
+
+              commentLabel.get_style_context().add_class("green-text");
+
+            }
+
+            Regex regexImpliesSingle = new Regex ("&gt;");
+
+            if (regexImpliesSingle.match (commentArray[f])){
+
+              commentLabel.get_style_context().add_class("green-text");
+
+            }
+
+          }catch(RegexError e){
+            
+            print ("Error report this on github!: %s\n", e.message);
+
+          }
+
+          commentBox.pack_start (commentLabel, false, false, 0);
 
         }
-
-        commentBox.pack_start (commentLabel, false, false, 0);
 
       }
 
@@ -388,7 +431,7 @@ public class Pho{
       threadDateLabel.set_line_wrap (true);
       threadDateLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
       threadDateLabel.set_max_width_chars(75);
-      threadDateLabel.set_alignment(0,0);
+      threadDateLabel.xalign = 0;
       threadDateLabel.get_style_context().add_class("blue-text");
 
       if (this.postList.get(i).getFilename() != 0 &&
@@ -411,11 +454,11 @@ public class Pho{
 
       }
 
-      if (this.postList.get(i).getExtension().to_string() == ".webm"){
+      if (this.postList.get(i).getExtension() == ".webm" ){
 
         var player = new VideoPlayer();
-        player.setUrl("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
-        this.threadList.get(i).getExtension().to_string()));
+        player.setUrl("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.postList.get(i).getFilename().to_string(),
+        this.postList.get(i).getExtension()));
         var clutterBox = player.buildPlayer();
 
         var playButton = new Button.from_icon_name ("media-playback-start", Gtk.IconSize.BUTTON);
@@ -457,7 +500,7 @@ public class Pho{
           replyLabel.set_line_wrap (true);
           replyLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
           replyLabel.set_max_width_chars(75);
-          replyLabel.set_alignment(0,0);
+          replyLabel.xalign = 0;
 
           var hseparator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
           
@@ -489,7 +532,7 @@ public class Pho{
 
             revealer.set_reveal_child(true);
 
-          }          
+          }
 
         });
 
@@ -604,7 +647,7 @@ public class Pho{
 
           var childPage = this.notebook.get_nth_page(currentPage);
           this.refreshPostsGlobal = true;
-          this.getPosts((int64)this.notebook.get_tab_label_text(childPage).to_int());
+          this.getPosts(int64.parse(this.notebook.get_tab_label_text(childPage)));
 
         }
 
@@ -627,8 +670,9 @@ public class Pho{
 
       }
 
-		}catch {
+		}catch(Error e) {
 
+      stderr.printf ("Something is wrong in getBoards");
 
     }
 
@@ -664,7 +708,7 @@ public class Pho{
 
       var childPage = this.notebook.get_nth_page(i);
 
-      if (threadNumber == (int64)this.notebook.get_tab_label_text(childPage).to_int()){
+      if (threadNumber == int64.parse(this.notebook.get_tab_label_text(childPage))){
 
         this.spinner.active = false;
         return false;
@@ -810,7 +854,7 @@ int main (string[] args){
 
       var childPage = pho.notebook.get_nth_page(currentPage);
       pho.refreshPostsGlobal = true;
-      pho.getPosts((int64)pho.notebook.get_tab_label_text(childPage).to_int());
+      pho.getPosts(int64.parse(pho.notebook.get_tab_label_text(childPage)));
 
     }
 
@@ -859,3 +903,4 @@ int main (string[] args){
   return 0;
 
 }
+
