@@ -141,6 +141,8 @@ public class Pho : Gtk.Application{
   public void displayThreads(){
 
     this.notebook.remove_page(0);
+    var webview = new WebKit.WebView();
+    
     this.threadBox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
     threadBox.set_spacing(10);
     threadBox.get_style_context().add_class("padding");
@@ -155,7 +157,7 @@ public class Pho : Gtk.Application{
 
     this.revealerGlobal.add(this.searchEntry);
 
-    threadBox.pack_start(this.revealerGlobal);
+    threadBox.pack_start(this.revealerGlobal,false, false, 0);
     Gtk.ScrolledWindow scrolled = new Gtk.ScrolledWindow (null, null);
 
     for (int i = 0; i < this.threadList.size; i++){
@@ -207,8 +209,9 @@ public class Pho : Gtk.Application{
 
       if (this.threadList.get(i).getFilename() != 0 &&
       this.threadList.get(i).getExtension().to_string() != ".webm"){
-
-        var webview = new WebKit.WebView();
+        
+        webview.close();
+        webview = new WebKit.WebView();
         var webviewSettings = new WebKit.Settings();
         webviewSettings.set_media_playback_requires_user_gesture(true);
         webview.set_settings(webviewSettings);
@@ -653,15 +656,52 @@ public class Pho : Gtk.Application{
 
       });
 
+      Gtk.Image settingsImage = new Gtk.Image.from_icon_name ("preferences-system-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+      settingsImage.pixel_size = 16;
+      Gtk.ToolButton settingsButton = new Gtk.ToolButton (settingsImage, null);
+      settingsButton.clicked.connect (() => {
+        
+        Gtk.Label shortCutsLabel = new Gtk.Label ("Short Cuts: ");
+        shortCutsLabel.xalign = 0;
+
+        Gtk.Label ctrlWLabel = new Gtk.Label ("- CTRL W | Close tab");
+        ctrlWLabel.xalign = 0;
+
+        Gtk.Label ctrlFLabel = new Gtk.Label ("- CTRL F | Reveal Search");
+        ctrlFLabel.xalign = 0;
+
+        Gtk.Label ctrlQLabel = new Gtk.Label ("- CTRL Q | Quit App");
+        ctrlQLabel.xalign = 0;
+
+        Gtk.Label filterLabel = new Gtk.Label ("Filter (comma seperated): ");
+        filterLabel.xalign = 0;
+
+        Gtk.Dialog dialog = new Gtk.Dialog ();
+
+        dialog.width_request = 500;
+        dialog.get_content_area ().spacing = 7;
+        dialog.get_content_area ().border_width = 10;
+        dialog.get_content_area ().pack_start (shortCutsLabel);
+        dialog.get_content_area ().pack_start (ctrlWLabel);
+        dialog.get_content_area ().pack_start (ctrlFLabel);
+        dialog.get_content_area ().pack_start (ctrlQLabel);
+        dialog.get_content_area ().pack_start (new Gtk.Label (""));
+        dialog.get_content_area ().pack_start (filterLabel);
+        dialog.get_widget_for_response (Gtk.ResponseType.OK).can_default = true;
+        dialog.set_default_response (Gtk.ResponseType.OK);
+        dialog.show_all ();
+
+      });
+
       if (this.notebook.get_n_pages() == 1){
 
-        this.spinner = new Gtk.Spinner();;
+        this.spinner = new Gtk.Spinner();
 
         var header = new Gtk.HeaderBar ();
         header.show_close_button = true;
         header.pack_start (refreshButton);
         header.pack_start (closeThreadButton);
-        header.pack_start(this.searchEntry);
+        header.pack_end(settingsButton);
         header.pack_end (this.comboBox);
         header.pack_end(this.spinner);
         header.show_all ();
@@ -733,7 +773,6 @@ int main (string[] args){
   }
 
   Pho pho = new Pho();
-
   Gtk.Settings.get_default().set("gtk-application-prefer-dark-theme", true);
 
   try {
@@ -886,13 +925,13 @@ int main (string[] args){
   header.pack_end(pho.spinner);
   header.show_all();
   pho.window.set_titlebar(header);
+  pho.window.add(pho.notebook);
   pho.window.show_all();
 
   pho.getThreadsSignal.connect(() => {
-
+    
     pho.displayThreads();
-    pho.window.add(pho.notebook);
-    pho.window.show_all();
+    pho.notebook.show_all();
 
   });
 
