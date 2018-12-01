@@ -28,6 +28,11 @@
   </screenshots>
 
   ​<releases>
+    <release version="1.4.1" date="2018-11-26">
+      <description>
+        <p>Fixed bugs that bug you.</p>
+      </description>    
+    </release>
     <release version="1.4.0" date="2018-10-16">
       <description>
         <p>Fixed the startup window size.</p>
