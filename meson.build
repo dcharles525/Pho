@@ -26,8 +26,7 @@ executable(
       dependency('gee-0.8'),
       dependency('gstreamer-1.0'),
       dependency('clutter-gst-3.0'),
-      dependency('clutter-gtk-1.0'),
-      dependency('granite')
+      dependency('clutter-gtk-1.0')
     ],
     install: true
 )

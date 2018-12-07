@@ -4,7 +4,6 @@ using Json;
 using WebKit;
 using Gee;
 using Gst;
-using Granite;
 
 //valac --pkg gtk+-3.0 --pkg libsoup-2.4 --pkg json-glib-1.0 --pkg webkit2gtk-4.0 --pkg gee-0.8 --pkg gstreamer-1.0 --pkg clutter-gst-3.0 --pkg clutter-gtk-1.0 --pkg granite Pho.vala Thread.vala Posts.vala Replies.vala VideoPlayer.vala
 
@@ -25,6 +24,7 @@ public class Pho : Gtk.Application{
   public Gtk.CssProvider provider = new Gtk.CssProvider();
   public Gtk.Box threadBox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
   public bool refreshPostsGlobal = false;
+  public Granite.Widgets.Toast toast = new Granite.Widgets.Toast ("");
   public string CODE_STYLE = """
     .green-text{
       color: #b5bd68;
@@ -111,8 +111,8 @@ public class Pho : Gtk.Application{
 
               }else{
 
-                var toast = new Granite.Widgets.Toast ("One or more threads didn't load!");
-                toast.send_notification ();
+                this.toast.title = "Couldn't show a thread for some network reason...";
+                this.toast.send_notification ();
 
               }
 
@@ -142,10 +142,12 @@ public class Pho : Gtk.Application{
 
     this.notebook.remove_page(0);
     var webview = new WebKit.WebView();
+    this.toast = new Granite.Widgets.Toast ("");
     
     this.threadBox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
     threadBox.set_spacing(10);
     threadBox.get_style_context().add_class("padding");
+    threadBox.pack_start(this.toast);
 
     this.searchEntry = new Gtk.SearchEntry ();
     this.searchEntry.set_placeholder_text("Enter search text...");
@@ -159,6 +161,24 @@ public class Pho : Gtk.Application{
 
     threadBox.pack_start(this.revealerGlobal,false, false, 0);
     Gtk.ScrolledWindow scrolled = new Gtk.ScrolledWindow (null, null);
+    
+    string[] filters = {""};
+
+    try{
+
+      if (FileUtils.test ("filter.txt", FileTest.IS_REGULAR)){
+        
+        string read;
+        FileUtils.get_contents ("filter.txt", out read);
+        filters = read.split (",");
+
+      }
+
+    }catch(Error e){
+
+      stderr.printf ("Something went wrong with the settings file");
+
+    }
 
     for (int i = 0; i < this.threadList.size; i++){
 
@@ -175,92 +195,108 @@ public class Pho : Gtk.Application{
         print ("Error report this on github!: %s\n", e.message);
 
       }
+      
+      bool filterBool = false;
 
-      var threadRepliesImagesLabel = new Gtk.Label("R: ".concat(this.threadList.get(i).getReplies().to_string()," | I: ",this.threadList.get(i).getImages().to_string()));
+	    foreach (unowned string str in filters) {
 
-      var threadSubjectLabel = new Gtk.Label(sub);
-      threadSubjectLabel.set_selectable(true);
-      threadSubjectLabel.set_use_markup(true);
-      threadSubjectLabel.set_line_wrap(true);
-      threadSubjectLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-      threadSubjectLabel.set_max_width_chars(75);
-      threadSubjectLabel.xalign = 0;
+        if (sub.down().contains(str.down())){
+          
+          filterBool = true;
 
-      var threadDateLabel = new Gtk.Label(this.threadList.get(i).getDate()
-      .concat(" - ",this.threadList.get(i).getThreadNumber().to_string()));
-      threadDateLabel.set_use_markup(true);
-      threadDateLabel.set_line_wrap(true);
-      threadDateLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-      threadDateLabel.set_max_width_chars(75);
-      threadDateLabel.xalign = 0;
-      threadDateLabel.get_style_context().add_class("blue-text");
-
-      var threadNumber = this.threadList.get(i).getThreadNumber();
-
-      Gtk.Button openThreadButton = new Gtk.Button.with_label("Open Thread");
-      openThreadButton.clicked.connect (() => {
-        this.spinner.active = true;
-        this.getPosts(threadNumber);
-      });
-      openThreadButton.get_style_context().add_class("button-color");
-
-      Gdk.RGBA rgba = Gdk.RGBA ();
-		  rgba.parse ("#393f42");
-
-      if (this.threadList.get(i).getFilename() != 0 &&
-      this.threadList.get(i).getExtension().to_string() != ".webm"){
-        
-        webview.close();
-        webview = new WebKit.WebView();
-        var webviewSettings = new WebKit.Settings();
-        webviewSettings.set_media_playback_requires_user_gesture(true);
-        webview.set_settings(webviewSettings);
-        webview.set_background_color(rgba);
-        webview.load_uri("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
-        this.threadList.get(i).getExtension().to_string()));
-
-        Gtk.ScrolledWindow scrolledImage = new Gtk.ScrolledWindow(null, null);
-        scrolledImage.set_min_content_height(200);
-        scrolledImage.add(webview);
-        threadBox.pack_start(scrolledImage, false, false, 0);
+        }
 
       }
+      
+      if (!filterBool){
 
-      if (this.threadList.get(i).getExtension().to_string() == ".webm"){
-        
-        var player = new VideoPlayer();
-        player.setUrl("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
-        this.threadList.get(i).getExtension().to_string()));
-        var clutterBox = player.buildPlayer();
+        var threadRepliesImagesLabel = new Gtk.Label("R: ".concat(this.threadList.get(i).getReplies().to_string()," | I: ",this.threadList.get(i).getImages().to_string()));
 
-        var playButton = new Button.from_icon_name ("media-playback-start", Gtk.IconSize.BUTTON);
-        playButton.clicked.connect (() => {
-          player.playFile();
+        var threadSubjectLabel = new Gtk.Label(sub);
+        threadSubjectLabel.set_selectable(true);
+        threadSubjectLabel.set_use_markup(true);
+        threadSubjectLabel.set_line_wrap(true);
+        threadSubjectLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+        threadSubjectLabel.set_max_width_chars(75);
+        threadSubjectLabel.xalign = 0;
+
+        var threadDateLabel = new Gtk.Label(this.threadList.get(i).getDate()
+        .concat(" - ",this.threadList.get(i).getThreadNumber().to_string()));
+        threadDateLabel.set_use_markup(true);
+        threadDateLabel.set_line_wrap(true);
+        threadDateLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+        threadDateLabel.set_max_width_chars(75);
+        threadDateLabel.xalign = 0;
+        threadDateLabel.get_style_context().add_class("blue-text");
+
+        var threadNumber = this.threadList.get(i).getThreadNumber();
+
+        Gtk.Button openThreadButton = new Gtk.Button.with_label("Open Thread");
+        openThreadButton.clicked.connect (() => {
+          this.spinner.active = true;
+          this.getPosts(threadNumber);
         });
+        openThreadButton.get_style_context().add_class("button-color");
 
-        var stopButton = new Button.from_icon_name ("media-playback-stop", Gtk.IconSize.BUTTON);
-        stopButton.clicked.connect (() => {
-          player.stopFile();
-        });
+        Gdk.RGBA rgba = Gdk.RGBA ();
+	      rgba.parse ("#393f42");
 
-        var bb = new ButtonBox (Orientation.HORIZONTAL);
-        bb.add (playButton);
-        bb.add (stopButton);
-        
-        clutterBox.set_size_request(150,200);
-        var vbox = new Box (Gtk.Orientation.VERTICAL, 0);
-        vbox.pack_start (clutterBox);
+        if (this.threadList.get(i).getFilename() != 0 &&
+        this.threadList.get(i).getExtension().to_string() != ".webm"){
+          
+          webview.close();
+          webview = new WebKit.WebView();
+          var webviewSettings = new WebKit.Settings();
+          webviewSettings.set_media_playback_requires_user_gesture(true);
+          webview.set_settings(webviewSettings);
+          webview.set_background_color(rgba);
+          webview.load_uri("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
+          this.threadList.get(i).getExtension().to_string()));
 
-        threadBox.pack_start (vbox, true, true, 0);
-        threadBox.pack_start (bb,  false, false, 0);
+          Gtk.ScrolledWindow scrolledImage = new Gtk.ScrolledWindow(null, null);
+          scrolledImage.set_min_content_height(200);
+          scrolledImage.add(webview);
+          threadBox.pack_start(scrolledImage, false, false, 0);
+
+        }
+
+        if (this.threadList.get(i).getExtension().to_string() == ".webm"){
+          
+          var player = new VideoPlayer();
+          player.setUrl("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
+          this.threadList.get(i).getExtension().to_string()));
+          var clutterBox = player.buildPlayer();
+
+          var playButton = new Button.from_icon_name ("media-playback-start", Gtk.IconSize.BUTTON);
+          playButton.clicked.connect (() => {
+            player.playFile();
+          });
+
+          var stopButton = new Button.from_icon_name ("media-playback-stop", Gtk.IconSize.BUTTON);
+          stopButton.clicked.connect (() => {
+            player.stopFile();
+          });
+
+          var bb = new ButtonBox (Orientation.HORIZONTAL);
+          bb.add (playButton);
+          bb.add (stopButton);
+          
+          clutterBox.set_size_request(150,200);
+          var vbox = new Box (Gtk.Orientation.VERTICAL, 0);
+          vbox.pack_start (clutterBox);
+
+          threadBox.pack_start (vbox, true, true, 0);
+          threadBox.pack_start (bb,  false, false, 0);
+
+        }
+
+        threadBox.pack_start(threadDateLabel, false, false, 0);
+        threadBox.pack_start(threadSubjectLabel, false, false, 0);
+        threadBox.pack_start(threadRepliesImagesLabel, false, false, 0);
+        threadBox.pack_start(openThreadButton, false, false, 0);
+        threadBox.pack_start(new Gtk.Separator(Gtk.Orientation.HORIZONTAL), false, false, 0);
 
       }
-
-      threadBox.pack_start(threadDateLabel, false, false, 0);
-      threadBox.pack_start(threadSubjectLabel, false, false, 0);
-      threadBox.pack_start(threadRepliesImagesLabel, false, false, 0);
-      threadBox.pack_start(openThreadButton, false, false, 0);
-      threadBox.pack_start(new Gtk.Separator(Gtk.Orientation.HORIZONTAL), false, false, 0);
 
     }
 
@@ -660,7 +696,7 @@ public class Pho : Gtk.Application{
       settingsImage.pixel_size = 16;
       Gtk.ToolButton settingsButton = new Gtk.ToolButton (settingsImage, null);
       settingsButton.clicked.connect (() => {
-        
+
         Gtk.Label shortCutsLabel = new Gtk.Label ("Short Cuts: ");
         shortCutsLabel.xalign = 0;
 
@@ -678,6 +714,48 @@ public class Pho : Gtk.Application{
 
         Gtk.Dialog dialog = new Gtk.Dialog ();
 
+        var filterBox = new Gtk.Entry ();
+        string filename = "filter.txt";
+        string read;
+        
+        try {
+
+          if (FileUtils.test (filename, FileTest.IS_REGULAR)){
+
+            FileUtils.get_contents (filename, out read);
+            filterBox.set_text(read);
+
+          }else{
+
+            filterBox.set_text("");
+
+          }
+
+        }catch(Error e){
+
+          stderr.printf ("Something went wrong with the settings file");
+
+        }
+
+        var saveButton = new Gtk.Button.with_label ("Apply Filter");
+        saveButton.get_style_context().add_class("button-color");
+      
+        saveButton.clicked.connect (() => {
+          try {
+
+            FileUtils.set_contents (filename, filterBox.get_text());
+
+          }catch(Error e){
+
+            stderr.printf ("Something went wrong writing the settings file");
+
+          }
+          this.toast.title = "Filter was saved";
+          this.toast.send_notification ();
+          this.spinner.active = true;
+          this.getThreads();
+        });
+
         dialog.width_request = 500;
         dialog.get_content_area ().spacing = 7;
         dialog.get_content_area ().border_width = 10;
@@ -687,6 +765,8 @@ public class Pho : Gtk.Application{
         dialog.get_content_area ().pack_start (ctrlQLabel);
         dialog.get_content_area ().pack_start (new Gtk.Label (""));
         dialog.get_content_area ().pack_start (filterLabel);
+        dialog.get_content_area ().pack_start (filterBox);
+        dialog.get_content_area ().pack_start (saveButton);
         dialog.get_widget_for_response (Gtk.ResponseType.OK).can_default = true;
         dialog.set_default_response (Gtk.ResponseType.OK);
         dialog.show_all ();
@@ -916,6 +996,8 @@ int main (string[] args){
     }
 
   });
+  
+  pho.toast = new Granite.Widgets.Toast ("");
 
   var header = new Gtk.HeaderBar ();
   header.show_close_button = true;
