@@ -121,7 +121,7 @@ public class Pho : Gtk.Application{
           }
 
         }catch(Error e){
-          
+
           stderr.printf ("Something is wrong in getThreads");
 
         }
@@ -143,7 +143,7 @@ public class Pho : Gtk.Application{
     this.notebook.remove_page(0);
     var webview = new WebKit.WebView();
     this.toast = new Granite.Widgets.Toast ("");
-    
+
     this.threadBox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
     threadBox.set_spacing(10);
     threadBox.get_style_context().add_class("padding");
@@ -161,16 +161,18 @@ public class Pho : Gtk.Application{
 
     threadBox.pack_start(this.revealerGlobal,false, false, 0);
     Gtk.ScrolledWindow scrolled = new Gtk.ScrolledWindow (null, null);
-    
+
     string[] filters = {""};
+    bool fileExists = false;
 
     try{
 
       if (FileUtils.test ("filter.txt", FileTest.IS_REGULAR)){
-        
+
         string read;
         FileUtils.get_contents ("filter.txt", out read);
         filters = read.split (",");
+        fileExists = true;
 
       }
 
@@ -191,23 +193,27 @@ public class Pho : Gtk.Application{
         sub = allTags.replace(sub, -1, 0, "");
 
       }catch(RegexError e){
-        
+
         print ("Error report this on github!: %s\n", e.message);
 
       }
-      
+
       bool filterBool = false;
 
-	    foreach (unowned string str in filters) {
+      if (fileExists){
 
-        if (sub.down().contains(str.down())){
-          
-          filterBool = true;
+        foreach (unowned string str in filters) {
+
+          if (sub.down().contains(str.down())){
+
+            filterBool = true;
+
+          }
 
         }
 
       }
-      
+
       if (!filterBool){
 
         var threadRepliesImagesLabel = new Gtk.Label("R: ".concat(this.threadList.get(i).getReplies().to_string()," | I: ",this.threadList.get(i).getImages().to_string()));
@@ -243,7 +249,7 @@ public class Pho : Gtk.Application{
 
         if (this.threadList.get(i).getFilename() != 0 &&
         this.threadList.get(i).getExtension().to_string() != ".webm"){
-          
+
           webview.close();
           webview = new WebKit.WebView();
           var webviewSettings = new WebKit.Settings();
@@ -261,7 +267,7 @@ public class Pho : Gtk.Application{
         }
 
         if (this.threadList.get(i).getExtension().to_string() == ".webm"){
-          
+
           var player = new VideoPlayer();
           player.setUrl("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.threadList.get(i).getFilename().to_string(),
           this.threadList.get(i).getExtension().to_string()));
@@ -280,7 +286,7 @@ public class Pho : Gtk.Application{
           var bb = new ButtonBox (Orientation.HORIZONTAL);
           bb.add (playButton);
           bb.add (stopButton);
-          
+
           clutterBox.set_size_request(150,200);
           var vbox = new Box (Gtk.Orientation.VERTICAL, 0);
           vbox.pack_start (clutterBox);
@@ -313,7 +319,7 @@ public class Pho : Gtk.Application{
   }
 
   public void getPosts(int64 threadNumber){
-  
+
     if (checkThread(threadNumber)){
 
       this.spinner.active = true;
@@ -353,14 +359,14 @@ public class Pho : Gtk.Application{
             var allTags = new Regex("<[^>]*>", RegexCompileFlags.CASELESS);
             com = allTags.replace(com, -1, 0, "");
             var commentArray = com.split("\n");
-            
+
             if (commentArray[0] != null){
-              
+
               Regex regexImpliesDouble = new Regex ("&gt;&gt;");
 
               if (regexImpliesDouble.match (commentArray[0])){
 
-                string threadNumberTemp = commentArray[0].substring (8, commentArray[0].length - 8); 
+                string threadNumberTemp = commentArray[0].substring (8, commentArray[0].length - 8);
 
                 Replies tempReply = new Replies();
                 tempReply.setOriginalPostNumber(int64.parse(threadNumberTemp));
@@ -372,7 +378,7 @@ public class Pho : Gtk.Application{
 
             }
 
-            
+
 
             this.postList.add(tempPost);
 
@@ -402,21 +408,21 @@ public class Pho : Gtk.Application{
     bool isReplies = false;
 
     for (int i = 0; i < this.postList.size; i++){
-      
+
       var com = this.postList.get(i).getComment();
       var commentBox = new Box (Gtk.Orientation.VERTICAL, 0);
 
       if (com != null){
 
         com = com.replace ("<br>", "\n");
-        
+
         try {
 
           var allTags = new Regex("<[^>]*>", RegexCompileFlags.CASELESS);
           com = allTags.replace(com, -1, 0, "");
 
         }catch(RegexError e){
-          
+
           print ("Error report this on github!: %s\n", e.message);
 
         }
@@ -433,7 +439,7 @@ public class Pho : Gtk.Application{
           commentLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
           commentLabel.set_justify(Gtk.Justification.LEFT);
           commentLabel.xalign = 0;
-          
+
           try {
 
             Regex regexImpliesDouble = new Regex ("&gt;&gt;");
@@ -453,7 +459,7 @@ public class Pho : Gtk.Application{
             }
 
           }catch(RegexError e){
-            
+
             print ("Error report this on github!: %s\n", e.message);
 
           }
@@ -484,11 +490,11 @@ public class Pho : Gtk.Application{
   		  rgba.parse ("#393f42");
         webview.set_background_color(rgba);
         webview.load_uri("https://i.4cdn.org/".concat(this.boardGlobal,"/",this.postList.get(i).getFilename().to_string(),this.postList.get(i).getExtension()));
-        
+
         Gtk.ScrolledWindow scrolledImage = new Gtk.ScrolledWindow (null, null);
         scrolledImage.set_min_content_height(200);
         scrolledImage.add(webview);
-    
+
         box.pack_start(scrolledImage, false, false, 0);
 
       }
@@ -513,7 +519,7 @@ public class Pho : Gtk.Application{
         var bb = new ButtonBox (Orientation.HORIZONTAL);
         bb.add (playButton);
         bb.add (stopButton);
-        
+
         clutterBox.set_size_request(150,200);
         var vbox = new Box (Gtk.Orientation.VERTICAL, 0);
         vbox.pack_start (clutterBox);
@@ -533,7 +539,7 @@ public class Pho : Gtk.Application{
       for (int g = 0; g < this.repliesList.size; g++){
 
         if (this.repliesList.get(g).getOriginalPostNumber() == this.postList.get(i).getPostNumber()){
-          
+
           var replyLabel = new Gtk.Label(this.repliesList.get(g).getComment());
           replyLabel.set_use_markup (true);
           replyLabel.set_line_wrap (true);
@@ -542,18 +548,18 @@ public class Pho : Gtk.Application{
           replyLabel.xalign = 0;
 
           var hseparator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
-          
+
           tempBox.pack_start(hseparator);
           tempBox.pack_start(replyLabel);
 
           isReplies = true;
 
         }
-        
+
       }
 
       if (isReplies){
-        
+
         revealer.add(tempBox);
         box.pack_start(revealer);
 
@@ -562,9 +568,9 @@ public class Pho : Gtk.Application{
         box.pack_start (getCommentsButton);
 
         getCommentsButton.clicked.connect (() => {
-          
+
           if (revealer.get_reveal_child()){
-            
+
             revealer.set_reveal_child(false);
 
           }else{
@@ -578,7 +584,7 @@ public class Pho : Gtk.Application{
       }
 
       isReplies = false;
-      
+
       //box.pack_start(revealer, false, false, 0);
       var hseparator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
       box.pack_start(hseparator, false, false, 0);
@@ -717,7 +723,7 @@ public class Pho : Gtk.Application{
         var filterBox = new Gtk.Entry ();
         string filename = "filter.txt";
         string read;
-        
+
         try {
 
           if (FileUtils.test (filename, FileTest.IS_REGULAR)){
@@ -739,7 +745,7 @@ public class Pho : Gtk.Application{
 
         var saveButton = new Gtk.Button.with_label ("Apply Filter");
         saveButton.get_style_context().add_class("button-color");
-      
+
         saveButton.clicked.connect (() => {
           try {
 
@@ -996,7 +1002,7 @@ int main (string[] args){
     }
 
   });
-  
+
   pho.toast = new Granite.Widgets.Toast ("");
 
   var header = new Gtk.HeaderBar ();
@@ -1011,7 +1017,7 @@ int main (string[] args){
   pho.window.show_all();
 
   pho.getThreadsSignal.connect(() => {
-    
+
     pho.displayThreads();
     pho.notebook.show_all();
 
@@ -1024,4 +1030,3 @@ int main (string[] args){
   return 0;
 
 }
-
