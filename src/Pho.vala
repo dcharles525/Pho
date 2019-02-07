@@ -216,36 +216,8 @@ public class Pho : Gtk.Application{
 
       if (!filterBool){
 
-        var threadRepliesImagesLabel = new Gtk.Label("R: ".concat(this.threadList.get(i).getReplies().to_string()," | I: ",this.threadList.get(i).getImages().to_string()));
-
-        var threadSubjectLabel = new Gtk.Label(sub);
-        threadSubjectLabel.set_selectable(true);
-        threadSubjectLabel.set_use_markup(true);
-        threadSubjectLabel.set_line_wrap(true);
-        threadSubjectLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        threadSubjectLabel.set_max_width_chars(75);
-        threadSubjectLabel.xalign = 0;
-
-        var threadDateLabel = new Gtk.Label(this.threadList.get(i).getDate()
-        .concat(" - ",this.threadList.get(i).getThreadNumber().to_string()));
-        threadDateLabel.set_use_markup(true);
-        threadDateLabel.set_line_wrap(true);
-        threadDateLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        threadDateLabel.set_max_width_chars(75);
-        threadDateLabel.xalign = 0;
-        threadDateLabel.get_style_context().add_class("blue-text");
-
-        var threadNumber = this.threadList.get(i).getThreadNumber();
-
-        Gtk.Button openThreadButton = new Gtk.Button.with_label(_("Open Thread"));
-        openThreadButton.clicked.connect (() => {
-          this.spinner.active = true;
-          this.getPosts(threadNumber);
-        });
-        openThreadButton.get_style_context().add_class("button-color");
-
         Gdk.RGBA rgba = Gdk.RGBA ();
-	      rgba.parse ("#393f42");
+        rgba.parse ("#393f42");
 
         if (this.threadList.get(i).getFilename() != 0 &&
         this.threadList.get(i).getExtension().to_string() != ".webm"){
@@ -296,9 +268,69 @@ public class Pho : Gtk.Application{
 
         }
 
-        threadBox.pack_start(threadDateLabel, false, false, 0);
-        threadBox.pack_start(threadSubjectLabel, false, false, 0);
+        var threadRepliesImagesLabel = new Gtk.Label("R: ".concat(this.threadList.get(i).getReplies().to_string()," | I: ",this.threadList.get(i).getImages().to_string()));
         threadBox.pack_start(threadRepliesImagesLabel, false, false, 0);
+
+        var threadDateLabel = new Gtk.Label(this.threadList.get(i).getDate()
+        .concat(" - ",this.threadList.get(i).getThreadNumber().to_string()));
+        threadDateLabel.set_use_markup(true);
+        threadDateLabel.set_line_wrap(true);
+        threadDateLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+        threadDateLabel.set_max_width_chars(75);
+        threadDateLabel.xalign = 0;
+        threadDateLabel.get_style_context().add_class("blue-text");
+
+        threadBox.pack_start(threadDateLabel, false, false, 0);
+
+        var subArray = sub.split("\n");
+
+        for (int f = 0; f < subArray.length; f++){
+
+          var threadSubjectLabel = new Gtk.Label(subArray[f]);
+          threadSubjectLabel.set_selectable(true);
+          threadSubjectLabel.set_use_markup(true);
+          threadSubjectLabel.set_line_wrap(true);
+          threadSubjectLabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+          threadSubjectLabel.set_max_width_chars(75);
+          threadSubjectLabel.xalign = 0;
+
+          try {
+
+            Regex regexImpliesDouble = new Regex ("&gt;&gt;");
+
+            if (regexImpliesDouble.match (subArray[f])){
+
+              threadSubjectLabel.get_style_context().add_class("green-text");
+
+            }
+
+            Regex regexImpliesSingle = new Regex ("&gt;");
+
+            if (regexImpliesSingle.match (subArray[f])){
+
+              threadSubjectLabel.get_style_context().add_class("green-text");
+
+            }
+
+          }catch(RegexError e){
+
+            print (_("Error report this on github!: %s\n"), e.message);
+
+          }
+
+          threadBox.pack_start(threadSubjectLabel, false, false, 0);
+
+        }
+
+        var threadNumber = this.threadList.get(i).getThreadNumber();
+
+        Gtk.Button openThreadButton = new Gtk.Button.with_label(_("Open Thread"));
+        openThreadButton.clicked.connect (() => {
+          this.spinner.active = true;
+          this.getPosts(threadNumber);
+        });
+        openThreadButton.get_style_context().add_class("button-color");
+
         threadBox.pack_start(openThreadButton, false, false, 0);
         threadBox.pack_start(new Gtk.Separator(Gtk.Orientation.HORIZONTAL), false, false, 0);
 
