@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.dcharles525.pho\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-07 09:02-0500\n"
+"POT-Creation-Date: 2019-02-07 09:08-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,72 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: src/Pho.vala:114
+msgid "Couldn't show a thread for some network reason..."
+msgstr ""
+
+#: src/Pho.vala:125
+msgid "Something is wrong in getThreads"
+msgstr ""
+
+#: src/Pho.vala:153
+msgid "Enter search text..."
+msgstr ""
+
+#: src/Pho.vala:179 src/Pho.vala:736
+msgid "Something went wrong with the settings file"
+msgstr ""
+
+#: src/Pho.vala:195 src/Pho.vala:420 src/Pho.vala:457
+#, c-format
+msgid "Error report this on github!: %s\n"
+msgstr ""
+
+#: src/Pho.vala:234
+msgid "Open Thread"
+msgstr ""
+
+#: src/Pho.vala:383
+msgid "Something is wrong in getPosts"
+msgstr ""
+
+#: src/Pho.vala:700
+msgid "Short Cuts: "
+msgstr ""
+
+#: src/Pho.vala:703
+msgid "- CTRL W | Close tab"
+msgstr ""
+
+#: src/Pho.vala:706
+msgid "- CTRL F | Reveal Search"
+msgstr ""
+
+#: src/Pho.vala:709
+msgid "- CTRL Q | Quit App"
+msgstr ""
+
+#: src/Pho.vala:712
+msgid "Filter (comma seperated): "
+msgstr ""
+
+#: src/Pho.vala:750
+msgid "Something went wrong writing the settings file"
+msgstr ""
+
+#: src/Pho.vala:795
+msgid "Something is wrong in getBoards"
+msgstr ""
+
+#: src/Pho.vala:852
+msgid "Could not initalize clutter! "
+msgstr ""
+
+#: src/Pho.vala:865
+#, c-format
+msgid "css didn't load %s"
+msgstr ""
 
 #: data/com.github.dcharles525.pho.desktop:3
 #: data/com.github.dcharles525.pho.appdata.xml:7
