@@ -163,6 +163,7 @@ public class Pho : Gtk.Application{
     Gtk.ScrolledWindow scrolled = new Gtk.ScrolledWindow (null, null);
 
     string[] filters = {""};
+    bool fileExists = false;
 
     try{
 
@@ -171,6 +172,7 @@ public class Pho : Gtk.Application{
         string read;
         FileUtils.get_contents ("filter.txt", out read);
         filters = read.split (",");
+        fileExists = true;
 
       }
 
@@ -198,11 +200,15 @@ public class Pho : Gtk.Application{
 
       bool filterBool = false;
 
-	    foreach (unowned string str in filters) {
+      if (fileExists){
 
-        if (sub.down().contains(str.down())){
+        foreach (unowned string str in filters) {
 
-          filterBool = true;
+          if (sub.down().contains(str.down())){
+
+            filterBool = true;
+
+          }
 
         }
 
