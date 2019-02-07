@@ -1,0 +1,182 @@
+# French translation for com.github.dcharles525.pho package.
+# Copyright (C) 2019 THE com.github.dcharles525.pho'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.dcharles525.pho package.
+# NathanBnm, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.dcharles525.pho\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-07 09:08-0500\n"
+"PO-Revision-Date: 2019-02-07 19:24+0100\n"
+"Last-Translator: NathanBnm\n"
+"Language-Team: Français\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/Pho.vala:114
+msgid "Couldn't show a thread for some network reason..."
+msgstr "Impossible d'afficher le fil de discussion à cause d'une erreur réseau…"
+
+#: src/Pho.vala:125
+msgid "Something is wrong in getThreads"
+msgstr "Il y a une erreur dans getThreads"
+
+#: src/Pho.vala:153
+msgid "Enter search text..."
+msgstr "Entrez le texte à rechercher…"
+
+#: src/Pho.vala:179 src/Pho.vala:736
+msgid "Something went wrong with the settings file"
+msgstr "Une erreur s'est produite dans le fichier des paramètres"
+
+#: src/Pho.vala:195 src/Pho.vala:420 src/Pho.vala:457
+#, c-format
+msgid "Error report this on github!: %s\n"
+msgstr "Erreur, reportez-la sur Github ! : %s\n"
+
+#: src/Pho.vala:234
+msgid "Open Thread"
+msgstr "Ouvrir le fil de discussion"
+
+#: src/Pho.vala:383
+msgid "Something is wrong in getPosts"
+msgstr "Il y a une erreur dans getPosts"
+
+#: src/Pho.vala:700
+msgid "Short Cuts: "
+msgstr "Raccourcis : "
+
+#: src/Pho.vala:703
+msgid "- CTRL W | Close tab"
+msgstr "- CTRL + W | Fermer l'onglet"
+
+#: src/Pho.vala:706
+msgid "- CTRL F | Reveal Search"
+msgstr "- CTREL + F | Rechercher"
+
+#: src/Pho.vala:709
+msgid "- CTRL Q | Quit App"
+msgstr "- CTRL + Q | Quitter l'application"
+
+#: src/Pho.vala:712
+msgid "Filter (comma seperated): "
+msgstr "Filtres (séparés par des virgules) : "
+
+#: src/Pho.vala:750
+msgid "Something went wrong writing the settings file"
+msgstr "Une erreur s'est produite lors de l'écriture dans le fichier des paramètres"
+
+#: src/Pho.vala:795
+msgid "Something is wrong in getBoards"
+msgstr "Il y a une erreur dans getBoards"
+
+#: src/Pho.vala:852
+msgid "Could not initalize clutter! "
+msgstr "Impossible d'initialiser clutter ! "
+
+#: src/Pho.vala:865
+#, c-format
+msgid "css didn't load %s"
+msgstr "Le CSS n'a pas été chargé %s"
+
+#: data/com.github.dcharles525.pho.desktop:3
+#: data/com.github.dcharles525.pho.appdata.xml:7
+msgid "Pho"
+msgstr "Pho"
+
+#: data/com.github.dcharles525.pho.desktop:4
+msgid "4chan browser"
+msgstr "Navigateur 4chan"
+
+#: data/com.github.dcharles525.pho.desktop:5
+#: data/com.github.dcharles525.pho.appdata.xml:8
+msgid "Pho for 4chan"
+msgstr "Pho pour 4chan"
+
+#: data/com.github.dcharles525.pho.desktop:8
+msgid "com.github.dcharles525.pho"
+msgstr "com.github.dcharles525.pho"
+
+#: data/com.github.dcharles525.pho.desktop:12
+msgid "4chan;pho;board;thread;images;"
+msgstr "4chan;pho;tableau;thread;images"
+
+#: data/com.github.dcharles525.pho.appdata.xml:10
+msgid ""
+"Browser 4chan like never before with amazing GTK+ and Vala technologies! "
+"Explore the wonders of /g/ or /news/, or any of the dozens of 4chan boards!"
+msgstr ""
+"Navigateur 4chan comme jamais auparavant avec les incroyables technologies GTK+ et Vala ! "
+"Explorez les merveilles de /g/ ou /news/, ou l'une des douzaines de tableaux 4chan !"
+
+#: data/com.github.dcharles525.pho.appdata.xml:12
+msgid "Browse your favorite boards!"
+msgstr "Naviguez à travers vos tableaux favoris !"
+
+#: data/com.github.dcharles525.pho.appdata.xml:13
+msgid "Read multiple threads at once!"
+msgstr "Lisez plusieurs fils de discussion à la fois !"
+
+#: data/com.github.dcharles525.pho.appdata.xml:14
+msgid "See images, videos, and gifs!"
+msgstr "Visualisez des images, des vidéos et des gifs !"
+
+#: data/com.github.dcharles525.pho.appdata.xml:33
+msgid "Added a filter and lots of code cleanup."
+msgstr "Ajout d'un filtre et beaucoup de nettoyage du code."
+
+#: data/com.github.dcharles525.pho.appdata.xml:38
+msgid "Fixed bugs that bug you."
+msgstr "Correction de bugs."
+
+#: data/com.github.dcharles525.pho.appdata.xml:43
+msgid "Fixed the startup window size."
+msgstr "Correction de la taille de la fenêtre au démarrage."
+
+#: data/com.github.dcharles525.pho.appdata.xml:44
+msgid "Improved thread searching."
+msgstr "Amélioration de la recherche de fil de discussion."
+
+#: data/com.github.dcharles525.pho.appdata.xml:49
+msgid "Basic thread searching."
+msgstr "Recherche basique de fil de discussion."
+
+#: data/com.github.dcharles525.pho.appdata.xml:54
+msgid "Fixed the header to be more clean and stable."
+msgstr "Correction de l'entête pour être plus propre et plus stable."
+
+#: data/com.github.dcharles525.pho.appdata.xml:55
+msgid "Made the UI a lot nicer and a bit smoother."
+msgstr "Interface plus agréable et un peu plus fluide."
+
+#: data/com.github.dcharles525.pho.appdata.xml:56
+msgid "Added CTRL-Q to close the app and CTRL-W to close a thread."
+msgstr "Ajout du raccourci CTRL+Q pour fermer l'application et de CTRL + W pour fermer un fil de discussion."
+
+#: data/com.github.dcharles525.pho.appdata.xml:57
+msgid "Started working on search functionality."
+msgstr "Préparation de la fonctionnalité de recherche."
+
+#: data/com.github.dcharles525.pho.appdata.xml:58
+msgid "Fixed lots of bugs."
+msgstr "Correction de nombreux bugs."
+
+#: data/com.github.dcharles525.pho.appdata.xml:63
+msgid "Added webms back in via gstreamer."
+msgstr "Ajout du support des vidéos webm via gstreamer."
+
+#: data/com.github.dcharles525.pho.appdata.xml:68
+msgid "Temporarily disabling webms."
+msgstr "Désactivation temporaire des vidéos webm."
+
+#: data/com.github.dcharles525.pho.appdata.xml:73
+msgid "Initial release"
+msgstr "Version initiale"
+
+#: data/com.github.dcharles525.pho.appdata.xml:104
+msgid "David Johnson"
+msgstr "David Johnson"
