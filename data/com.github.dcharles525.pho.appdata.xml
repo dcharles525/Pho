@@ -28,6 +28,13 @@
   </screenshots>
 
   ​<releases>
+    <release version="1.6.0" date="2019-2-10">
+      <description>
+        <p>Added ability to translate.</p>
+        <p>Fixed a style bug</p>
+        <p>French Translation by @NathanBnm</p>
+      </description>    
+    </release>
     <release version="1.5.2" date="2019-1-2">
       <description>
         <p>Fixed startup error.</p>
