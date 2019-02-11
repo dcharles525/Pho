@@ -105,7 +105,7 @@ msgstr "com.github.dcharles525.pho"
 
 #: data/com.github.dcharles525.pho.desktop:12
 msgid "4chan;pho;board;thread;images;"
-msgstr "4chan;pho;tableau;thread;images"
+msgstr "4chan;pho;tableau;thread;images;"
 
 #: data/com.github.dcharles525.pho.appdata.xml:10
 msgid ""
