@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.dcharles525.pho\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-10 21:07-0500\n"
+"POT-Creation-Date: 2019-02-22 11:00-0500\n"
 "PO-Revision-Date: 2019-02-07 09:02-0500\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -126,62 +126,75 @@ msgid "See images, videos, and gifs!"
 msgstr "See images, videos, and gifs!"
 
 #: data/com.github.dcharles525.pho.appdata.xml:33
+msgid "Added ability to translate."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml:34
+#, fuzzy
+msgid "Fixed a style bug"
+msgstr "Fixed lots of bugs."
+
+#: data/com.github.dcharles525.pho.appdata.xml:35
+msgid "French Translation by @NathanBnm"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml:40
 #, fuzzy
 msgid "Fixed startup error."
 msgstr "Fixed the startup window size."
 
-#: data/com.github.dcharles525.pho.appdata.xml:38
+#: data/com.github.dcharles525.pho.appdata.xml:45
 msgid "Added a filter and lots of code cleanup."
 msgstr "Added a filter and lots of code cleanup."
 
-#: data/com.github.dcharles525.pho.appdata.xml:43
+#: data/com.github.dcharles525.pho.appdata.xml:50
 msgid "Fixed bugs that bug you."
 msgstr "Fixed bugs that bug you."
 
-#: data/com.github.dcharles525.pho.appdata.xml:48
+#: data/com.github.dcharles525.pho.appdata.xml:55
 msgid "Fixed the startup window size."
 msgstr "Fixed the startup window size."
 
-#: data/com.github.dcharles525.pho.appdata.xml:49
+#: data/com.github.dcharles525.pho.appdata.xml:56
 msgid "Improved thread searching."
 msgstr "Improved thread searching."
 
-#: data/com.github.dcharles525.pho.appdata.xml:54
+#: data/com.github.dcharles525.pho.appdata.xml:61
 msgid "Basic thread searching."
 msgstr "Basic thread searching."
 
-#: data/com.github.dcharles525.pho.appdata.xml:59
+#: data/com.github.dcharles525.pho.appdata.xml:66
 msgid "Fixed the header to be more clean and stable."
 msgstr "Fixed the header to be more clean and stable."
 
-#: data/com.github.dcharles525.pho.appdata.xml:60
+#: data/com.github.dcharles525.pho.appdata.xml:67
 msgid "Made the UI a lot nicer and a bit smoother."
 msgstr "Made the UI a lot nicer and a bit smoother."
 
-#: data/com.github.dcharles525.pho.appdata.xml:61
+#: data/com.github.dcharles525.pho.appdata.xml:68
 msgid "Added CTRL-Q to close the app and CTRL-W to close a thread."
 msgstr "Added CTRL-Q to close the app and CTRL-W to close a thread."
 
-#: data/com.github.dcharles525.pho.appdata.xml:62
+#: data/com.github.dcharles525.pho.appdata.xml:69
 msgid "Started working on search functionality."
 msgstr "Started working on search functionality."
 
-#: data/com.github.dcharles525.pho.appdata.xml:63
+#: data/com.github.dcharles525.pho.appdata.xml:70
 msgid "Fixed lots of bugs."
 msgstr "Fixed lots of bugs."
 
-#: data/com.github.dcharles525.pho.appdata.xml:68
+#: data/com.github.dcharles525.pho.appdata.xml:75
 msgid "Added webms back in via gstreamer."
 msgstr "Added webms back in via gstreamer."
 
-#: data/com.github.dcharles525.pho.appdata.xml:73
+#: data/com.github.dcharles525.pho.appdata.xml:80
 msgid "Temporarily disabling webms."
 msgstr "Temporarily disabling webms."
 
-#: data/com.github.dcharles525.pho.appdata.xml:78
+#: data/com.github.dcharles525.pho.appdata.xml:85
 msgid "Initial release"
 msgstr "Initial release"
 
-#: data/com.github.dcharles525.pho.appdata.xml:109
+#: data/com.github.dcharles525.pho.appdata.xml:116
 msgid "David Johnson"
 msgstr "David Johnson"
