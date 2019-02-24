@@ -53,3 +53,4 @@ executable(
 )
 
 subdir ('po')
+subdir ('data')
