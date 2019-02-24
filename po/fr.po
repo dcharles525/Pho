@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: com.github.dcharles525.pho\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-22 11:00-0500\n"
-"PO-Revision-Date: 2019-02-07 19:24+0100\n"
+"PO-Revision-Date: 2019-02-24 10:42+0100\n"
 "Last-Translator: NathanBnm\n"
 "Language-Team: Français\n"
 "Language: fr\n"
@@ -57,7 +57,7 @@ msgstr "- CTRL + W | Fermer l'onglet"
 
 #: src/Pho.vala:744
 msgid "- CTRL F | Reveal Search"
-msgstr "- CTREL + F | Rechercher"
+msgstr "- CTRL + F | Rechercher"
 
 #: src/Pho.vala:747
 msgid "- CTRL Q | Quit App"
@@ -130,7 +130,7 @@ msgstr "Visualisez des images, des vidéos et des gifs !"
 
 #: data/com.github.dcharles525.pho.appdata.xml:33
 msgid "Added ability to translate."
-msgstr ""
+msgstr "L'application peut maintenant être traduite."
 
 #: data/com.github.dcharles525.pho.appdata.xml:34
 #, fuzzy
@@ -139,7 +139,7 @@ msgstr "Correction de nombreux bugs."
 
 #: data/com.github.dcharles525.pho.appdata.xml:35
 msgid "French Translation by @NathanBnm"
-msgstr ""
+msgstr "Traduction française par @NathanBnm"
 
 #: data/com.github.dcharles525.pho.appdata.xml:40
 #, fuzzy
