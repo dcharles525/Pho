@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-18 20:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/com.github.dcharles525.pho.desktop.in:3
+#: data/com.github.dcharles525.pho.appdata.xml.in:7
+msgid "Pho"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.desktop.in:4
+msgid "4chan browser"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.desktop.in:5
+#: data/com.github.dcharles525.pho.appdata.xml.in:8
+msgid "Pho for 4chan"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.desktop.in:8
+msgid "com.github.dcharles525.pho"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.desktop.in:12
+msgid "4chan;pho;board;thread;images;"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:10
+msgid ""
+"Browser 4chan like never before with amazing GTK+ and Vala technologies! "
+"Explore the wonders of /g/ or /news/, or any of the dozens of 4chan boards!"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:12
+msgid "Browse your favorite boards!"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:13
+msgid "Read multiple threads at once!"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:14
+msgid "See images, videos, and gifs!"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:33
+msgid "Added ability to translate."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:34
+msgid "Fixed a style bug"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:35
+msgid "French Translation by @NathanBnm"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:40
+msgid "Fixed startup error."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:45
+msgid "Added a filter and lots of code cleanup."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:50
+msgid "Fixed bugs that bug you."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:55
+msgid "Fixed the startup window size."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:56
+msgid "Improved thread searching."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:61
+msgid "Basic thread searching."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:66
+msgid "Fixed the header to be more clean and stable."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:67
+msgid "Made the UI a lot nicer and a bit smoother."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:68
+msgid "Added CTRL-Q to close the app and CTRL-W to close a thread."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:69
+msgid "Started working on search functionality."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:70
+msgid "Fixed lots of bugs."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:75
+msgid "Added webms back in via gstreamer."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:80
+msgid "Temporarily disabling webms."
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:85
+msgid "Initial release"
+msgstr ""
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:116
+msgid "David Johnson"
+msgstr ""

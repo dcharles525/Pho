@@ -111,7 +111,7 @@ public class Pho : Gtk.Application{
 
               }else{
 
-                this.toast.title = _("Couldn't show a thread for some network reason...");
+                this.toast.title = _("Couldn't show a thread for some network reason…");
                 this.toast.send_notification ();
 
               }
@@ -122,7 +122,7 @@ public class Pho : Gtk.Application{
 
         }catch(Error e){
 
-          stderr.printf (_("Something is wrong in getThreads"));
+          stderr.printf ("Something is wrong in getThreads");
 
         }
 
@@ -150,7 +150,7 @@ public class Pho : Gtk.Application{
     threadBox.pack_start(this.toast);
 
     this.searchEntry = new Gtk.SearchEntry ();
-    this.searchEntry.set_placeholder_text(_("Enter search text..."));
+    this.searchEntry.set_placeholder_text(_("Enter search text…"));
     this.searchEntry.activate.connect (() => {
 
       this.search(this.searchEntry.get_text());
@@ -178,7 +178,7 @@ public class Pho : Gtk.Application{
 
     }catch(Error e){
 
-      stderr.printf (_("Something went wrong with the settings file"));
+      stderr.printf ("Something went wrong with the settings file");
 
     }
 
@@ -194,7 +194,7 @@ public class Pho : Gtk.Application{
 
       }catch(RegexError e){
 
-        print (_("Error report this on github!: %s\n"), e.message);
+        print ("Error report this on github!: %s\n", e.message);
 
       }
 
@@ -314,7 +314,7 @@ public class Pho : Gtk.Application{
 
           }catch(RegexError e){
 
-            print (_("Error report this on github!: %s\n"), e.message);
+            print ("Error report this on github!: %s\n", e.message);
 
           }
 
@@ -327,6 +327,7 @@ public class Pho : Gtk.Application{
         Gtk.Button openThreadButton = new Gtk.Button.with_label(_("Open Thread"));
         openThreadButton.clicked.connect (() => {
           this.spinner.active = true;
+          this.spinner.tooltip_text = _("Loading…");
           this.getPosts(threadNumber);
         });
         openThreadButton.get_style_context().add_class("button-color");
@@ -342,7 +343,7 @@ public class Pho : Gtk.Application{
     scrolled.set_min_content_height(400);
     scrolled.add(threadBox);
 
-    Gtk.Label title = new Gtk.Label ("Board");
+    Gtk.Label title = new Gtk.Label (_("Board"));
     this.notebook.get_style_context().add_class("padding");
     this.notebook.insert_page (scrolled, title,0);
     this.spinner.active = false;
@@ -355,6 +356,7 @@ public class Pho : Gtk.Application{
     if (checkThread(threadNumber)){
 
       this.spinner.active = true;
+      this.spinner.tooltip_text = _("Loading…");
       this.postList.clear ();
       this.repliesList.clear ();
 
@@ -418,7 +420,7 @@ public class Pho : Gtk.Application{
 
         }catch(Error e){
 
-          stderr.printf (_("Something is wrong in getPosts"));
+          stderr.printf ("Something is wrong in getPosts");
 
         }
 
@@ -455,7 +457,7 @@ public class Pho : Gtk.Application{
 
         }catch(RegexError e){
 
-          print (_("Error report this on github!: %s\n"), e.message);
+          print ("Error report this on github!: %s\n", e.message);
 
         }
 
@@ -492,7 +494,7 @@ public class Pho : Gtk.Application{
 
           }catch(RegexError e){
 
-            print (_("Error report this on github!: %s\n"), e.message);
+            print ("Error report this on github!: %s\n", e.message);
 
           }
 
@@ -595,7 +597,7 @@ public class Pho : Gtk.Application{
         revealer.add(tempBox);
         box.pack_start(revealer);
 
-        var getCommentsButton = new Gtk.Button.with_label ("Show/Hide Replies");
+        var getCommentsButton = new Gtk.Button.with_label (_("Show/Hide Replies"));
         getCommentsButton.get_style_context().add_class("button-color");
         box.pack_start (getCommentsButton);
 
@@ -686,12 +688,14 @@ public class Pho : Gtk.Application{
 
       this.comboBox.changed.connect (() => {
         this.spinner.active = true;
+        this.spinner.tooltip_text = _("Loading…");
   			string title = this.comboBox.get_active_text ();
         this.boardGlobal = title;
         this.getThreads();
   		});
 
       Gtk.Button closeThreadButton = new Gtk.Button.from_icon_name ("edit-clear-all-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+      closeThreadButton.tooltip_text = _("Close thread");
       closeThreadButton.clicked.connect (() => {
 
         int currentPage = notebook.get_current_page();
@@ -711,10 +715,12 @@ public class Pho : Gtk.Application{
 
       Gtk.Image refreshImage = new Gtk.Image.from_icon_name ("view-refresh-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
       Gtk.ToolButton refreshButton = new Gtk.ToolButton (refreshImage, null);
+      refreshButton.tooltip_text = _("Refresh");
       refreshButton.clicked.connect (() => {
 
         int currentPage = this.notebook.get_current_page();
         this.spinner.active = true;
+        this.spinner.tooltip_text = _("Loading…");
 
         if (currentPage == 0){
 
@@ -733,21 +739,22 @@ public class Pho : Gtk.Application{
       Gtk.Image settingsImage = new Gtk.Image.from_icon_name ("preferences-system-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
       settingsImage.pixel_size = 16;
       Gtk.ToolButton settingsButton = new Gtk.ToolButton (settingsImage, null);
+      settingsButton.tooltip_text = _("Settings");
       settingsButton.clicked.connect (() => {
 
-        Gtk.Label shortCutsLabel = new Gtk.Label (_("Short Cuts: "));
+        Gtk.Label shortCutsLabel = new Gtk.Label (_("Shortcuts: "));
         shortCutsLabel.xalign = 0;
 
-        Gtk.Label ctrlWLabel = new Gtk.Label (_("- CTRL W | Close tab"));
+        Gtk.Label ctrlWLabel = new Gtk.Label (_("- CTRL-W: Close tab"));
         ctrlWLabel.xalign = 0;
 
-        Gtk.Label ctrlFLabel = new Gtk.Label (_("- CTRL F | Reveal Search"));
+        Gtk.Label ctrlFLabel = new Gtk.Label (_("- CTRL-F: Reveal Search"));
         ctrlFLabel.xalign = 0;
 
-        Gtk.Label ctrlQLabel = new Gtk.Label (_("- CTRL Q | Quit App"));
+        Gtk.Label ctrlQLabel = new Gtk.Label (_("- CTRL-Q: Quit App"));
         ctrlQLabel.xalign = 0;
 
-        Gtk.Label filterLabel = new Gtk.Label (_("Filter (comma seperated): "));
+        Gtk.Label filterLabel = new Gtk.Label (_("Filter (comma separated): "));
         filterLabel.xalign = 0;
 
         Gtk.Dialog dialog = new Gtk.Dialog ();
@@ -771,11 +778,11 @@ public class Pho : Gtk.Application{
 
         }catch(Error e){
 
-          stderr.printf (_("Something went wrong with the settings file"));
+          stderr.printf ("Something went wrong with the settings file");
 
         }
 
-        var saveButton = new Gtk.Button.with_label ("Apply Filter");
+        var saveButton = new Gtk.Button.with_label (_("Apply Filter"));
         saveButton.get_style_context().add_class("button-color");
 
         saveButton.clicked.connect (() => {
@@ -785,12 +792,13 @@ public class Pho : Gtk.Application{
 
           }catch(Error e){
 
-            stderr.printf (_("Something went wrong writing the settings file"));
+            stderr.printf ("Something went wrong writing the settings file");
 
           }
-          this.toast.title = "Filter was saved";
+          this.toast.title = _("Filter was saved");
           this.toast.send_notification ();
           this.spinner.active = true;
+          this.spinner.tooltip_text = _("Loading…");
           this.getThreads();
         });
 
@@ -814,7 +822,6 @@ public class Pho : Gtk.Application{
       if (this.notebook.get_n_pages() == 1){
 
         this.spinner = new Gtk.Spinner();
-
         var header = new Gtk.HeaderBar ();
         header.show_close_button = true;
         header.pack_start (refreshButton);
@@ -830,7 +837,7 @@ public class Pho : Gtk.Application{
 
 		}catch(Error e) {
 
-      stderr.printf (_("Something is wrong in getBoards"));
+      stderr.printf ("Something is wrong in getBoards");
 
     }
 
@@ -839,6 +846,7 @@ public class Pho : Gtk.Application{
   public void search(string search){
 
     this.spinner.active = true;
+    this.spinner.tooltip_text = _("Loading…");
 
     ArrayList<Thread> searchList = new ArrayList<Thread>();
 
@@ -887,7 +895,7 @@ int main (string[] args){
   GtkClutter.init (ref args);
   var err = GtkClutter.init (ref args);
   if (err != Clutter.InitError.SUCCESS) {
-      error (_("Could not initalize clutter! ")+err.to_string ());
+      error ("Could not initalize clutter! " + err.to_string ());
   }
 
   Pho pho = new Pho();
@@ -900,11 +908,11 @@ int main (string[] args){
 
   } catch (Error e) {
 
-    warning(_("css didn't load %s"),e.message);
+    warning("css didn't load %s",e.message);
 
   }
 
-  var windowTitle = "Pho";
+  var windowTitle = _("Pho");
   pho.window.title = windowTitle;
   pho.window.set_position (Gtk.WindowPosition.CENTER);
   pho.window.destroy.connect (Gtk.main_quit);
@@ -985,6 +993,7 @@ int main (string[] args){
 
       pho.revealerGlobal.set_reveal_child(false);
       pho.spinner.active = true;
+      pho.spinner.tooltip_text = _("Loading…");
       escBool = false;
       pho.getThreads();
 
@@ -995,6 +1004,7 @@ int main (string[] args){
   });
 
   pho.spinner.active = true;
+  pho.spinner.tooltip_text = _("Loading…");
 
   Gtk.Image img = new Gtk.Image.from_icon_name ("view-refresh-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
   Gtk.ToolButton refreshButton = new Gtk.ToolButton (img, null);
@@ -1002,6 +1012,7 @@ int main (string[] args){
 
     int currentPage = pho.notebook.get_current_page();
     pho.spinner.active = true;
+    pho.spinner.tooltip_text = _("Loading…");
 
     if (currentPage == 0){
 
