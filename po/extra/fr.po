@@ -1,0 +1,136 @@
+# French translations for extra package.
+# Copyright (C) 2019 THE extra'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# NathanBnm, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-18 20:19+0200\n"
+"PO-Revision-Date: 2019-04-18 20:01+0200\n"
+"Last-Translator: NathanBnm\n"
+"Language-Team: Français\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: data/com.github.dcharles525.pho.desktop.in:3
+#: data/com.github.dcharles525.pho.appdata.xml.in:7
+msgid "Pho"
+msgstr "Pho"
+
+#: data/com.github.dcharles525.pho.desktop.in:4
+msgid "4chan browser"
+msgstr "Navigateur pour 4Chan"
+
+#: data/com.github.dcharles525.pho.desktop.in:5
+#: data/com.github.dcharles525.pho.appdata.xml.in:8
+msgid "Pho for 4chan"
+msgstr "Pho pour 4Chan"
+
+#: data/com.github.dcharles525.pho.desktop.in:8
+msgid "com.github.dcharles525.pho"
+msgstr "com.github.dcharles525.pho"
+
+#: data/com.github.dcharles525.pho.desktop.in:12
+msgid "4chan;pho;board;thread;images;"
+msgstr "4chan;pho;tableau;fil;images;"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:10
+msgid ""
+"Browser 4chan like never before with amazing GTK+ and Vala technologies! "
+"Explore the wonders of /g/ or /news/, or any of the dozens of 4chan boards!"
+msgstr ""
+"Un navigateur pour 4chan comme jamais vu auparavant avec les incroyables "
+"technologies GTK+ et Vala ! Explorez les merveilles de /g/ ou /news/, ou "
+"l'une des douzaines de tableaux 4chan !"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:12
+msgid "Browse your favorite boards!"
+msgstr "Naviguez à travers vos tableaux favoris !"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:13
+msgid "Read multiple threads at once!"
+msgstr "Lisez plusieurs fils de discussion à la fois !"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:14
+msgid "See images, videos, and gifs!"
+msgstr "Visualisez les images, les vidéos et les GIFS !"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:33
+msgid "Added ability to translate."
+msgstr "L'application peut désormais être traduite."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:34
+msgid "Fixed a style bug"
+msgstr "Correction d'un bug de l'apparence"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:35
+msgid "French Translation by @NathanBnm"
+msgstr "Traduction en français par @NathanBnm"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:40
+msgid "Fixed startup error."
+msgstr "Correction d'une erreur au lancement de l'application."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:45
+msgid "Added a filter and lots of code cleanup."
+msgstr "Ajout des filtres et beacoup de nettoyage du code."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:50
+msgid "Fixed bugs that bug you."
+msgstr "Correction des bugs qui vous font bugger."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:55
+msgid "Fixed the startup window size."
+msgstr "Correction de la taille de la fenêtre au démarrage"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:56
+msgid "Improved thread searching."
+msgstr "Amélioration de la recherche des fils de discussion."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:61
+msgid "Basic thread searching."
+msgstr "Recherche simple des fils de discussion."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:66
+msgid "Fixed the header to be more clean and stable."
+msgstr "Correction de l'en-tête pour qu'il soit plus clair et plus stable."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:67
+msgid "Made the UI a lot nicer and a bit smoother."
+msgstr ""
+"Amélioration de l'interface graphique pour la rendre plus simple et fluide."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:68
+msgid "Added CTRL-Q to close the app and CTRL-W to close a thread."
+msgstr ""
+"Ajout du raccourci CTRL+Q pour fermer l'application, et du raccourci CTRL+W "
+"pour fermer un fil de discussion."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:69
+msgid "Started working on search functionality."
+msgstr "Préparation d'une fonctionnalité de recherche."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:70
+msgid "Fixed lots of bugs."
+msgstr "Correction de nombreux bugs."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:75
+msgid "Added webms back in via gstreamer."
+msgstr "Réajout du format vidéo webm via gstreamer."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:80
+msgid "Temporarily disabling webms."
+msgstr "Désactivation temoraire des vidéos au format webm."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:85
+msgid "Initial release"
+msgstr "Version initiale"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:116
+msgid "David Johnson"
+msgstr "David Johnson"

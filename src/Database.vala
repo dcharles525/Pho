@@ -5,7 +5,7 @@ class DataBase : Object {
   public Gda.Connection cnn;
   
   public void open () throws Error {
-          stdout.printf("Opening Database connection...\n");
+          stdout.printf("Opening Database connection…\n");
           this.cnn = Gda.Connection.open_from_string (null, this.constr, null, Gda.ConnectionOptions.NONE);
   }
 
@@ -14,7 +14,7 @@ class DataBase : Object {
           throws Error
           requires (this.cnn.is_opened())
   {
-          stdout.printf("Creating and populating data...\n");
+          stdout.printf("Creating and populating data…\n");
           this.run_query("CREATE TABLE test (description string, notes string)");
           this.run_query("INSERT INTO test (description, notes) VALUES (\"Test description 1\", \"Some notes\")");
           this.run_query("INSERT INTO test (description, notes) VALUES (\"Test description 2\", \"Some additional notes\")");

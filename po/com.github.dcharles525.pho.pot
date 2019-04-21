@@ -8,189 +8,81 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.dcharles525.pho\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-22 11:00-0500\n"
+"POT-Creation-Date: 2019-04-18 21:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/Pho.vala:114
-msgid "Couldn't show a thread for some network reason..."
-msgstr ""
-
-#: src/Pho.vala:125
-msgid "Something is wrong in getThreads"
+msgid "Couldn't show a thread for some network reason…"
 msgstr ""
 
 #: src/Pho.vala:153
-msgid "Enter search text..."
-msgstr ""
-
-#: src/Pho.vala:181 src/Pho.vala:774
-msgid "Something went wrong with the settings file"
-msgstr ""
-
-#: src/Pho.vala:197 src/Pho.vala:317 src/Pho.vala:458 src/Pho.vala:495
-#, c-format
-msgid "Error report this on github!: %s\n"
+msgid "Enter search text…"
 msgstr ""
 
 #: src/Pho.vala:327
 msgid "Open Thread"
 msgstr ""
 
-#: src/Pho.vala:421
-msgid "Something is wrong in getPosts"
+#: src/Pho.vala:330 src/Pho.vala:359 src/Pho.vala:691 src/Pho.vala:723
+#: src/Pho.vala:801 src/Pho.vala:849 src/Pho.vala:996 src/Pho.vala:1007
+#: src/Pho.vala:1015
+msgid "Loading…"
 msgstr ""
 
-#: src/Pho.vala:738
-msgid "Short Cuts: "
+#: src/Pho.vala:346
+msgid "Board"
 msgstr ""
 
-#: src/Pho.vala:741
-msgid "- CTRL W | Close tab"
+#: src/Pho.vala:600
+msgid "Show/Hide Replies"
 msgstr ""
 
-#: src/Pho.vala:744
-msgid "- CTRL F | Reveal Search"
+#: src/Pho.vala:698
+msgid "Close thread"
 msgstr ""
 
-#: src/Pho.vala:747
-msgid "- CTRL Q | Quit App"
+#: src/Pho.vala:718
+msgid "Refresh"
 msgstr ""
 
-#: src/Pho.vala:750
-msgid "Filter (comma seperated): "
+#: src/Pho.vala:742
+msgid "Settings"
 msgstr ""
 
-#: src/Pho.vala:788
-msgid "Something went wrong writing the settings file"
+#: src/Pho.vala:745
+msgid "Shortcuts: "
 msgstr ""
 
-#: src/Pho.vala:833
-msgid "Something is wrong in getBoards"
+#: src/Pho.vala:748
+msgid "- CTRL-W: Close tab"
 msgstr ""
 
-#: src/Pho.vala:890
-msgid "Could not initalize clutter! "
+#: src/Pho.vala:751
+msgid "- CTRL-F: Reveal Search"
 msgstr ""
 
-#: src/Pho.vala:903
-#, c-format
-msgid "css didn't load %s"
+#: src/Pho.vala:754
+msgid "- CTRL-Q: Quit App"
 msgstr ""
 
-#: data/com.github.dcharles525.pho.desktop:3
-#: data/com.github.dcharles525.pho.appdata.xml:7
+#: src/Pho.vala:757
+msgid "Filter (comma separated): "
+msgstr ""
+
+#: src/Pho.vala:785
+msgid "Apply Filter"
+msgstr ""
+
+#: src/Pho.vala:798
+msgid "Filter was saved"
+msgstr ""
+
+#: src/Pho.vala:915
 msgid "Pho"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.desktop:4
-msgid "4chan browser"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.desktop:5
-#: data/com.github.dcharles525.pho.appdata.xml:8
-msgid "Pho for 4chan"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.desktop:8
-msgid "com.github.dcharles525.pho"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.desktop:12
-msgid "4chan;pho;board;thread;images;"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:10
-msgid ""
-"Browser 4chan like never before with amazing GTK+ and Vala technologies! "
-"Explore the wonders of /g/ or /news/, or any of the dozens of 4chan boards!"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:12
-msgid "Browse your favorite boards!"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:13
-msgid "Read multiple threads at once!"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:14
-msgid "See images, videos, and gifs!"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:33
-msgid "Added ability to translate."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:34
-msgid "Fixed a style bug"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:35
-msgid "French Translation by @NathanBnm"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:40
-msgid "Fixed startup error."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:45
-msgid "Added a filter and lots of code cleanup."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:50
-msgid "Fixed bugs that bug you."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:55
-msgid "Fixed the startup window size."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:56
-msgid "Improved thread searching."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:61
-msgid "Basic thread searching."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:66
-msgid "Fixed the header to be more clean and stable."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:67
-msgid "Made the UI a lot nicer and a bit smoother."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:68
-msgid "Added CTRL-Q to close the app and CTRL-W to close a thread."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:69
-msgid "Started working on search functionality."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:70
-msgid "Fixed lots of bugs."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:75
-msgid "Added webms back in via gstreamer."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:80
-msgid "Temporarily disabling webms."
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:85
-msgid "Initial release"
-msgstr ""
-
-#: data/com.github.dcharles525.pho.appdata.xml:116
-msgid "David Johnson"
 msgstr ""
