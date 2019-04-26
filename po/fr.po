@@ -1,86 +1,89 @@
-# French translation for com.github.dcharles525.pho package.
+# French translations for com.github.dcharles525.pho package.
 # Copyright (C) 2019 THE com.github.dcharles525.pho'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.dcharles525.pho package.
 # NathanBnm, 2019.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.dcharles525.pho\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-10 21:07-0500\n"
-"PO-Revision-Date: 2019-02-07 19:24+0100\n"
+"POT-Creation-Date: 2019-04-18 21:22+0200\n"
+"PO-Revision-Date: 2019-04-18 20:01+0200\n"
 "Last-Translator: NathanBnm\n"
 "Language-Team: Français\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/Pho.vala:114
-msgid "Couldn't show a thread for some network reason..."
+msgid "Couldn't show a thread for some network reason…"
 msgstr ""
 "Impossible d'afficher le fil de discussion à cause d'une erreur réseau…"
 
-#: src/Pho.vala:125
-msgid "Something is wrong in getThreads"
-msgstr "Il y a une erreur dans getThreads"
-
 #: src/Pho.vala:153
-msgid "Enter search text..."
-msgstr "Entrez le texte à rechercher…"
-
-#: src/Pho.vala:181 src/Pho.vala:774
-msgid "Something went wrong with the settings file"
-msgstr "Une erreur s'est produite dans le fichier des paramètres"
-
-#: src/Pho.vala:197 src/Pho.vala:317 src/Pho.vala:458 src/Pho.vala:495
-#, c-format
-msgid "Error report this on github!: %s\n"
-msgstr "Erreur, reportez-la sur Github ! : %s\n"
+msgid "Enter search text…"
+msgstr "Recherchez ici…"
 
 #: src/Pho.vala:327
 msgid "Open Thread"
 msgstr "Ouvrir le fil de discussion"
 
-#: src/Pho.vala:421
-msgid "Something is wrong in getPosts"
-msgstr "Il y a une erreur dans getPosts"
+#: src/Pho.vala:330 src/Pho.vala:359 src/Pho.vala:691 src/Pho.vala:723
+#: src/Pho.vala:801 src/Pho.vala:849 src/Pho.vala:996 src/Pho.vala:1007
+#: src/Pho.vala:1015
+msgid "Loading…"
+msgstr "Chargement…"
 
-#: src/Pho.vala:738
-msgid "Short Cuts: "
+#: src/Pho.vala:346
+msgid "Board"
+msgstr "Tableau"
+
+#: src/Pho.vala:600
+msgid "Show/Hide Replies"
+msgstr "Afficher/Masquer les réponses"
+
+#: src/Pho.vala:698
+msgid "Close thread"
+msgstr "Fermer le fil de discussion"
+
+#: src/Pho.vala:718
+msgid "Refresh"
+msgstr "Actualiser"
+
+#: src/Pho.vala:742
+msgid "Settings"
+msgstr "Paramètres"
+
+#: src/Pho.vala:745
+msgid "Shortcuts: "
 msgstr "Raccourcis : "
 
-#: src/Pho.vala:741
-msgid "- CTRL W | Close tab"
-msgstr "- CTRL + W | Fermer l'onglet"
+#: src/Pho.vala:748
+msgid "- CTRL-W: Close tab"
+msgstr "- CTRL + W : Fermer l'onglet"
 
-#: src/Pho.vala:744
-msgid "- CTRL F | Reveal Search"
-msgstr "- CTREL + F | Rechercher"
+#: src/Pho.vala:751
+msgid "- CTRL-F: Reveal Search"
+msgstr "- CTRL + F : Rechercher"
 
-#: src/Pho.vala:747
-msgid "- CTRL Q | Quit App"
-msgstr "- CTRL + Q | Quitter l'application"
+#: src/Pho.vala:754
+msgid "- CTRL-Q: Quit App"
+msgstr "- CTRL + Q : Quitter l'application"
 
-#: src/Pho.vala:750
-msgid "Filter (comma seperated): "
+#: src/Pho.vala:757
+msgid "Filter (comma separated): "
 msgstr "Filtres (séparés par des virgules) : "
 
-#: src/Pho.vala:788
-msgid "Something went wrong writing the settings file"
-msgstr ""
-"Une erreur s'est produite lors de l'écriture dans le fichier des paramètres"
+#: src/Pho.vala:785
+msgid "Apply Filter"
+msgstr "Appliquer les filtres"
 
-#: src/Pho.vala:833
-msgid "Something is wrong in getBoards"
-msgstr "Il y a une erreur dans getBoards"
+#: src/Pho.vala:798
+msgid "Filter was saved"
+msgstr "Les filtres ont été enregistrés"
 
-#: src/Pho.vala:890
-msgid "Could not initalize clutter! "
-msgstr "Impossible d'initialiser clutter ! "
-
-#: src/Pho.vala:903
-#, c-format
-msgid "css didn't load %s"
-msgstr "Le CSS n'a pas été chargé %s"
+#: src/Pho.vala:915
+msgid "Pho"
+msgstr "Pho"

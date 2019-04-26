@@ -1,4 +1,4 @@
-project ('com.github.dcharles525.pho', 'vala', 'c')
+project ('com.github.dcharles525.pho', 'vala', 'c', version: '1.6.0')
 
 i18n = import('i18n')
 gnome = import ('gnome')
@@ -11,24 +11,6 @@ asresources = gnome.compile_resources(
 
 add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), language:'c')
 add_global_arguments ('-DGETTEXT_PACKAGE="' + meson.project_name () + '"', language:'c')
-
-i18n.merge_file(
-  input: join_paths('data', meson.project_name() + '.desktop'),
-  output: meson.project_name() + '.desktop',
-  po_dir: join_paths(meson.source_root(), 'po'),
-  type: 'desktop',
-  install: true,
-  install_dir: join_paths(get_option('datadir'), 'applications')
-)
-
-#Translate and install our .appdata file
-i18n.merge_file(
-  input: join_paths('data', meson.project_name() + '.appdata.xml'),
-  output: meson.project_name() + '.appdata.xml',
-  po_dir: join_paths(meson.source_root(), 'po'),
-  install: true,
-  install_dir: join_paths(get_option('datadir'), 'metainfo')
-)
 
 executable(
     meson.project_name(),
@@ -53,3 +35,6 @@ executable(
 )
 
 subdir ('po')
+subdir ('data')
+
+meson.add_install_script('meson/post_install.py')
