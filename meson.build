@@ -15,10 +15,8 @@ add_global_arguments ('-DGETTEXT_PACKAGE="' + meson.project_name () + '"', langu
 executable(
     meson.project_name(),
     'src/Pho.vala',
-    'src/Thread.vala',
-    'src/Posts.vala',
-    'src/Replies.vala',
-    'src/VideoPlayer.vala',
+    'src/Utils/Network.vala',
+    'src/Structs/Boards.vala',
     asresources,
     dependencies: [
       dependency('gtk+-3.0'),
