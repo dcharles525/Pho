@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-18 20:19+0200\n"
+"PO-Revision-Date: 2019-11-04 20:19+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+#: data/com.github.dcharles525.pho.desktop.in:3
+#: data/com.github.dcharles525.pho.appdata.xml.in:7
+msgid "Pho"
+msgstr "Pho"
+
+#: data/com.github.dcharles525.pho.desktop.in:4
+msgid "4chan browser"
+msgstr "Verken 4chan"
+
+#: data/com.github.dcharles525.pho.desktop.in:5
+#: data/com.github.dcharles525.pho.appdata.xml.in:8
+msgid "Pho for 4chan"
+msgstr "Pho voor 4chan"
+
+#: data/com.github.dcharles525.pho.desktop.in:8
+msgid "com.github.dcharles525.pho"
+msgstr "com.github.dcharles525.pho"
+
+#: data/com.github.dcharles525.pho.desktop.in:12
+msgid "4chan;pho;board;thread;images;"
+msgstr "4chan;pho;subforum;onderwerp;afbeeldingen;"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:10
+msgid ""
+"Browser 4chan like never before with amazing GTK+ and Vala technologies! "
+"Explore the wonders of /g/ or /news/, or any of the dozens of 4chan boards!"
+msgstr ""
+"Verken 4chan als nooit tevoren dankzij GTK+ en Vala! Verken de wondere "
+"wereld van /g/ of /news, of één van de andere talloze 4chan-subfora!"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:12
+msgid "Browse your favorite boards!"
+msgstr "Verken je favoriete subfora!"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:13
+msgid "Read multiple threads at once!"
+msgstr "Lees meerdere onderwerpen tegelijk!"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:14
+msgid "See images, videos, and gifs!"
+msgstr "Bekijk afbeeldingen, video's en gifs!"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:33
+msgid "Added ability to translate."
+msgstr "Vertaalmogelijkheid toegevoegd."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:34
+msgid "Fixed a style bug"
+msgstr "Stijlbug opgelost"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:35
+msgid "French Translation by @NathanBnm"
+msgstr "Franse vertaling, met dank aan @NathanBnm"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:40
+msgid "Fixed startup error."
+msgstr "Opstartfout opgelost."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:45
+msgid "Added a filter and lots of code cleanup."
+msgstr "Filter toegevoegd en code opgeschoond."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:50
+msgid "Fixed bugs that bug you."
+msgstr "Dwarsliggers opgelost die dwars lagen."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:55
+msgid "Fixed the startup window size."
+msgstr "Venstergrootte bij opstarten verbeterd."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:56
+msgid "Improved thread searching."
+msgstr "Onderwerpdoorzoeking verbeterd."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:61
+msgid "Basic thread searching."
+msgstr "Doorzoek onderwerpen."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:66
+msgid "Fixed the header to be more clean and stable."
+msgstr "Kop verbeterd: eenvoudiger en stabieler."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:67
+msgid "Made the UI a lot nicer and a bit smoother."
+msgstr "Uiterlijk netter en vloeiender gemaakt."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:68
+msgid "Added CTRL-Q to close the app and CTRL-W to close a thread."
+msgstr "Ctrl+Q (afsluiten) en Ctrl+W (onderwerp sluiten) toegevoegd."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:69
+msgid "Started working on search functionality."
+msgstr "Begonnen met implementatie van zoekfunctionaliteit."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:70
+msgid "Fixed lots of bugs."
+msgstr "Veel bugs opgelost."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:75
+msgid "Added webms back in via gstreamer."
+msgstr "Webms terug geïmplementeerd middels gstreamer."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:80
+msgid "Temporarily disabling webms."
+msgstr "Webms tijdelijk uitgeschakeld."
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:85
+msgid "Initial release"
+msgstr "Initiële uitgave"
+
+#: data/com.github.dcharles525.pho.appdata.xml.in:116
+msgid "David Johnson"
+msgstr "David Johnson"

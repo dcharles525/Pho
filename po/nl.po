@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.dcharles525.pho package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.dcharles525.pho\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-18 21:22+0200\n"
+"PO-Revision-Date: 2019-11-04 20:08+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+#: src/Pho.vala:114
+msgid "Couldn't show a thread for some network reason…"
+msgstr "Het onderwerp kan niet worden getoond wegens een onbekende netwerkfout…"
+
+#: src/Pho.vala:153
+msgid "Enter search text…"
+msgstr "Voer een zoekterm in…"
+
+#: src/Pho.vala:327
+msgid "Open Thread"
+msgstr "Onderwerp openen"
+
+#: src/Pho.vala:330 src/Pho.vala:359 src/Pho.vala:691 src/Pho.vala:723
+#: src/Pho.vala:801 src/Pho.vala:849 src/Pho.vala:996 src/Pho.vala:1007
+#: src/Pho.vala:1015
+msgid "Loading…"
+msgstr "Bezig met laden…"
+
+#: src/Pho.vala:346
+msgid "Board"
+msgstr "Subforum"
+
+#: src/Pho.vala:600
+msgid "Show/Hide Replies"
+msgstr "Antwoorden tonen/verbergen"
+
+#: src/Pho.vala:698
+msgid "Close thread"
+msgstr "Onderwerp sluiten"
+
+#: src/Pho.vala:718
+msgid "Refresh"
+msgstr "Verversen"
+
+#: src/Pho.vala:742
+msgid "Settings"
+msgstr "Instellingen"
+
+#: src/Pho.vala:745
+msgid "Shortcuts: "
+msgstr "Sneltoetsen: "
+
+#: src/Pho.vala:748
+msgid "- CTRL-W: Close tab"
+msgstr "- CTRL+W: Tabblad sluiten"
+
+#: src/Pho.vala:751
+msgid "- CTRL-F: Reveal Search"
+msgstr "- CTRL+F: Zoekbalk tonen"
+
+#: src/Pho.vala:754
+msgid "- CTRL-Q: Quit App"
+msgstr "- CTRL+Q: Toepassing afsluiten"
+
+#: src/Pho.vala:757
+msgid "Filter (comma separated): "
+msgstr "Filter (kommagescheiden): "
+
+#: src/Pho.vala:785
+msgid "Apply Filter"
+msgstr "Filter toepassen"
+
+#: src/Pho.vala:798
+msgid "Filter was saved"
+msgstr "Filter is opgeslagen"
+
+#: src/Pho.vala:915
+msgid "Pho"
+msgstr "Pho"
